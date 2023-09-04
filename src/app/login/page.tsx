@@ -41,7 +41,9 @@ const Login = () => {
     return (
         <Section className="min-h-screen grid place-items-center">
             <Container className="rounded-xl border p-6 shadow-md">
-                <h1 className="text-2xl font-bold">Login</h1>
+                <h1 className="text-2xl font-bold">
+                    Iniciar sesión
+                </h1>
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
