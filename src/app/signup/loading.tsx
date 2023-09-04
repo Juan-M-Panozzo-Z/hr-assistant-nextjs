@@ -7,7 +7,8 @@ const Login = () => {
         <Section className="min-h-screen grid place-items-center">
             <Container className="rounded-xl border p-6 shadow-md">
                 <Box className="space-y-4">
-                    {Array.from({ length: 7 }).map((_, i) => (
+                    <Skeleton className="h-4 w-[100px]" />
+                    {Array.from({ length: 5 }).map((_, i) => (
                         <SkeletonInput key={i} />
                     ))}
                     <Box className="flex justify-between">

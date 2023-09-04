@@ -4,17 +4,15 @@ import { Container, Section, Box } from "@radix-ui/themes";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -25,9 +23,6 @@ const formSchema = z.object({
     lastname: z
         .string()
         .min(3, { message: "El apellido debe tener al menos 3 caracteres" }),
-    area: z
-        .string()
-        .min(3, { message: "El area debe tener al menos 3 caracteres" }),
     email: z.string().email({
         message: "Por favor, ingrese un correo válido",
     }),
@@ -42,7 +37,6 @@ const Register = () => {
         defaultValues: {
             name: "",
             lastname: "",
-            area: "",
             email: "",
             password: "",
         },
@@ -67,7 +61,13 @@ const Register = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Nombre</FormLabel>
-                                    <Input placeholder="Nombre" {...field} />
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Nombre"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
                                 </FormItem>
                             )}
                         />
@@ -77,34 +77,13 @@ const Register = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Apellido</FormLabel>
-                                    <Input placeholder="Apellido" {...field} />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="area"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Area</FormLabel>
-                                    <Select>
-                                        <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Area" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectGroup>
-                                                <SelectItem value="1">
-                                                    Area 1
-                                                </SelectItem>
-                                                <SelectItem value="2">
-                                                    Area 2
-                                                </SelectItem>
-                                                <SelectItem value="3">
-                                                    Area 3
-                                                </SelectItem>
-                                            </SelectGroup>
-                                        </SelectContent>
-                                    </Select>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Apellido"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
                                 </FormItem>
                             )}
                         />
@@ -114,10 +93,13 @@ const Register = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Correo electrónico</FormLabel>
-                                    <Input
-                                        placeholder="ejemplo@correo.com"
-                                        {...field}
-                                    />
+                                    <FormControl>
+                                        <Input
+                                            placeholder="ejemplo@correo.com"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
                                 </FormItem>
                             )}
                         />
@@ -127,11 +109,14 @@ const Register = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Contraseña</FormLabel>
-                                    <Input
-                                        type="password"
-                                        placeholder="********"
-                                        {...field}
-                                    />
+                                    <FormControl>
+                                        <Input
+                                            type="password"
+                                            placeholder="********"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
                                 </FormItem>
                             )}
                         />
