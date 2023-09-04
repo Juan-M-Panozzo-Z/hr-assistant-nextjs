@@ -16,6 +16,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const formSchema = z.object({
     name: z
@@ -134,7 +135,14 @@ const Register = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit">Registrarse</Button>
+                        <Box className="flex justify-between gap-2">
+                            <Button type="submit">Registrarse</Button>
+                            <Link href={"/login"}>
+                                <Button variant="outline">
+                                    Iniciar sesión
+                                </Button>
+                            </Link>
+                        </Box>
                     </form>
                 </Form>
             </Container>

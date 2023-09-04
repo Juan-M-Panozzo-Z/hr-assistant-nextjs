@@ -82,7 +82,7 @@ const Login = () => {
                                 </FormItem>
                             )}
                         />
-                        <Box className="flex justify-between">
+                        <Box className="flex justify-between gap-2">
                             <Button type="submit">Ingresar</Button>
                             <Link href={"/signup"}>
                                 <Button variant="outline">Registrarse</Button>
