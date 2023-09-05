@@ -47,7 +47,7 @@ const Register = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         await axios
-            .post("/api/auth/signup", values)
+            .post("/api/signup", values)
             .then(() => {
                 router.push("/login");
             })

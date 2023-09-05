@@ -7,7 +7,7 @@ export default async function Home() {
     console.log(session);
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1 className="text-6xl font-bold">¡Bienvenid@ {<User />}</h1>
+            <h1 className="text-6xl font-bold">¡Bienvenid@ {<User />}!</h1>
         </div>
     );
 }
