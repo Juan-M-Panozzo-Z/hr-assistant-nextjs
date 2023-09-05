@@ -1,5 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { signIn, useSession } from "next-auth/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -14,18 +17,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Box, Container, Section } from "@radix-ui/themes";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 const formSchema = z.object({
     email: z.string().email({
         message: "Por favor, ingrese un correo válido",
     }),
     password: z
-        .string() 
+        .string()
         .min(8, { message: "La contraseña debe tener al menos 8 caracteres" }),
 });
 
 const Login = () => {
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -35,15 +38,17 @@ const Login = () => {
     });
 
     const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values);
+        signIn("credentials", {
+            redirect: false,
+            email: values.email,
+            password: values.password,
+        });
     };
 
     return (
         <Section className="min-h-screen grid place-items-center">
             <Container className="rounded-xl border p-6 shadow-md">
-                <h1 className="text-2xl font-bold">
-                    Iniciar sesión
-                </h1>
+                <h1 className="text-2xl font-bold">Iniciar sesión</h1>
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(onSubmit)}
@@ -84,7 +89,7 @@ const Login = () => {
                         />
                         <Box className="flex justify-between gap-2">
                             <Button type="submit">Ingresar</Button>
-                            <Link href={"/signup"}>
+                            <Link href="/signup">
                                 <Button variant="outline">Registrarse</Button>
                             </Link>
                         </Box>

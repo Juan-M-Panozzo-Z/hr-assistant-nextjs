@@ -1,5 +1,6 @@
 "use client";
-
+import axios from "axios";
+import {useRouter} from 'next/navigation'
 import { Container, Section, Box } from "@radix-ui/themes";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,6 +33,8 @@ const formSchema = z.object({
 });
 
 const Register = () => {
+    const router = useRouter();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -42,8 +45,15 @@ const Register = () => {
         },
     });
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values);
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        await axios
+            .post("/api/auth/signup", values)
+            .then(() => {
+                router.push("/login");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (

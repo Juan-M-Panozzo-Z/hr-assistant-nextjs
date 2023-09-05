@@ -1,24 +1,21 @@
-import { Box, Container, Section } from "@radix-ui/themes";
-import { Skeleton } from "@/components/ui/skeleton";
 import SkeletonInput from "@/components/SkeletonInput";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Box, Container, Section } from "@radix-ui/themes";
 
-const Login = () => {
+const Loading = () => {
     return (
         <Section className="min-h-screen grid place-items-center">
             <Container className="rounded-xl border p-6 shadow-md">
-                <Box className="space-y-4">
-                    <Skeleton className="h-4 w-[100px]" />
-                    {Array.from({ length: 5 }).map((_, i) => (
-                        <SkeletonInput key={i} />
-                    ))}
-                    <Box className="flex justify-between">
-                        <Skeleton className="h-8 w-[100px]" />
-                        <Skeleton className="h-8 w-[100px]" />
-                    </Box>
+                {Array.from({ length: 4 }).map((_, i) => (
+                    <SkeletonInput key={i} />
+                ))}
+                <Box className="flex justify-between gap-2">
+                    <Skeleton className="h-8 w-[100px]" />
+                    <Skeleton className="h-8 w-[100px]" />
                 </Box>
             </Container>
         </Section>
     );
 };
 
-export default Login;
+export default Loading;
