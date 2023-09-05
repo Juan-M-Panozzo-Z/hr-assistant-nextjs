@@ -9,7 +9,7 @@ export async function POST(req: Request) {
         const existingUser = await prisma.user.findUnique({
             where: {
                 email: email.toLowerCase(),
-            },
+            } as any,
         });
 
         if (existingUser) {
