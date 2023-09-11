@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
 import UserData from "@/components/UserData";
+import CheckInOutData from "@/components/CheckInOutData";
 
 export default function Home() {
     const { status } = useSession();
@@ -17,6 +18,7 @@ export default function Home() {
             <div className="">
                 <Navbar />
                 <UserData />
+                <CheckInOutData />
             </div>
         );
     }
