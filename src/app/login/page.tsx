@@ -1,8 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -28,6 +30,9 @@ const formSchema = z.object({
 });
 
 const Login = () => {
+    const { status } = useSession();
+    const router = useRouter();
+    const [error, setError] = useState(null);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -42,7 +47,20 @@ const Login = () => {
             redirect: false,
             email: values.email,
             password: values.password,
+        }).then((response: any) => {
+            if (response.error) {
+                setError(response.error);
+                form.setError("email", {
+                    message: "Verifica tu correo electrónico",
+                });
+                form.setError("password", {
+                    message: "Verifica tu contraseña",
+                });
+            }
         });
+        if (status === "authenticated") {
+            router.push("/");
+        }
     };
 
     return (

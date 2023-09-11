@@ -7,5 +7,10 @@ type Props = {
 };
 
 export const NextAuthProvider = ({ children }: Props) => {
+    if (SessionProvider === undefined) {
+        console.log("SessionProvider is undefined");
+        return <div> SessionProvider is undefined</div>;
+    }
+
     return <SessionProvider>{children}</SessionProvider>;
 };

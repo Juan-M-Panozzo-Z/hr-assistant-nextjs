@@ -12,16 +12,16 @@ export const authOptions: NextAuthOptions = {
     session: {
         strategy: "jwt",
     },
+    secret: process.env.NEXTAUTH_SECRET,
+    jwt: {
+        secret: process.env.NEXTAUTH_SECRET,
+    },
     providers: [
         CredentialsProvider({
             name: "Sign in",
             credentials: {
-                email: {
-                    label: "Email",
-                    type: "email",
-                    placeholder: "ejemplo@correo.com",
-                },
-                password: { label: "Password", type: "password" },
+                email: { type: "email" },
+                password: { type: "password" },
             },
             async authorize(credentials: Credentials | undefined) {
                 if (!credentials) {

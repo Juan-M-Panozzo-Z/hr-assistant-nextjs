@@ -1,13 +1,23 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { User } from "@/components/user.component";
+"use client";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Navbar from "../components/Navbar";
+import UserData from "@/components/UserData";
 
-export default async function Home() {
-    const session = await getServerSession(authOptions);
-    console.log(session);
-    return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1 className="text-6xl font-bold">¡Bienvenid@ {<User />}!</h1>
-        </div>
-    );
+export default function Home() {
+    const { status } = useSession();
+    const router = useRouter();
+
+    if (status === "unauthenticated") {
+        router.push("/login");
+    }
+
+    if (status === "authenticated") {
+        return (
+            <div className="">
+                <Navbar />
+                <UserData />
+            </div>
+        );
+    }
 }
