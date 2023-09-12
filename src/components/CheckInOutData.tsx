@@ -27,97 +27,97 @@ const sampleData = [
         name: "Juan",
         lastname: "Perez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Juan",
         lastname: "Perez",
         checkType: "Out",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Ricardo",
         lastname: "Perez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Alfonzo",
         lastname: "Gonzalez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Juan",
         lastname: "Perez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Juan",
         lastname: "Perez",
         checkType: "Out",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Ricardo",
         lastname: "Perez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Alfonzo",
         lastname: "Gonzalez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Juan",
         lastname: "Perez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Juan",
         lastname: "Perez",
         checkType: "Out",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Ricardo",
         lastname: "Perez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Alfonzo",
         lastname: "Gonzalez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Juan",
         lastname: "Perez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Juan",
         lastname: "Perez",
         checkType: "Out",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Ricardo",
         lastname: "Perez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
     {
         name: "Alfonzo",
         lastname: "Gonzalez",
         checkType: "In",
-        createdAt: "2021-10-10",
+        createdAt: "2021-10-10 10:00",
     },
 ];
 
@@ -182,7 +182,9 @@ const CheckInOutData = async ({ session }: any) => {
                             <TableHead>Tipo de registro</TableHead>
                             <TableHead>Nombre</TableHead>
                             <TableHead>Apellido</TableHead>
-                            <TableHead>Fecha y hora</TableHead>
+                            <TableHead>
+                                Fecha y hora
+                            </TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -201,7 +203,9 @@ const CheckInOutData = async ({ session }: any) => {
                                 </TableCell>
                                 <TableCell>{data.name}</TableCell>
                                 <TableCell>{data.lastname}</TableCell>
-                                <TableCell>{data.createdAt}</TableCell>
+                                <TableCell>
+                                    {data.createdAt}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
