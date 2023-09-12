@@ -5,7 +5,7 @@ import { Box, Container, Section } from "@radix-ui/themes";
 const Loading = () => {
     return (
         <Section className="min-h-screen grid place-items-center">
-            <Container className="rounded-xl border p-6 shadow-md">
+            <Container className="rounded-xl border p-6 shadow-md w-80">
                 {Array.from({ length: 4 }).map((_, i) => (
                     <SkeletonInput key={i} />
                 ))}

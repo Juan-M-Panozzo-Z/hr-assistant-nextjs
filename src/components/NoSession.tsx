@@ -1,22 +1,16 @@
+"use client";
+
 import { Box, Container, Section, Text } from "@radix-ui/themes";
 import { Button } from "./ui/button";
 import Link from "next/link";
-
+import { useEffect } from "react";
+import { redirect } from "next/navigation";
 const NoSession = () => {
-    return (
-        <Section>
-            <Container>
-                <Box display={"block"} className="flex flex-col gap-4 justify-center items-center min-h-screen">
-                    <h3 className="text-xl">
-                        Debe iniciar sesión para ver esta página
-                    </h3>
-                    <Link href="/login">
-                        <Button>Ir allí</Button>
-                    </Link>
-                </Box>
-            </Container>
-        </Section>
-    );
+    useEffect(() => {
+        redirect("/login");
+    }, []);
+
+    return null
 };
 
 export default NoSession;

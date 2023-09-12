@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import {useRouter} from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { Container, Section, Box } from "@radix-ui/themes";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,9 +30,11 @@ const formSchema = z.object({
     password: z
         .string()
         .min(8, { message: "La contraseña debe tener al menos 8 caracteres" }),
-    legajo: z.number().positive({
-        message: "El legajo debe ser un número positivo",
-    }),
+    legajo: z.coerce
+        .number()
+        .int()
+        .positive()
+        .min(1, { message: "El legajo debe ser un número positivo" }),
 });
 
 const Register = () => {
@@ -40,16 +42,10 @@ const Register = () => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-            lastname: "",
-            email: "",
-            password: "",
-            legajo: 0,
-        },
     });
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        console.log(values);
         await axios
             .post("/api/signup", values)
             .then(() => {
@@ -62,7 +58,7 @@ const Register = () => {
 
     return (
         <Section className="min-h-screen grid place-items-center">
-            <Container className="rounded-xl border p-6 shadow-md">
+            <Container className="rounded-xl border p-6 shadow-md w-80">
                 <h1 className="text-2xl font-bold">Registrarse</h1>
                 <Form {...form}>
                     <form
@@ -108,6 +104,7 @@ const Register = () => {
                                 <FormItem>
                                     <FormLabel>Legajo</FormLabel>
                                     <FormControl>
+                                        {/* number */}
                                         <Input
                                             placeholder="Legajo"
                                             {...field}

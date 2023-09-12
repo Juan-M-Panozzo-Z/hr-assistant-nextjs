@@ -14,17 +14,6 @@ import { Badge } from "./ui/badge";
 import ButtonEnableUser from "./ButtonEnableUser";
 
 const TableUsers = ({ users }: { users: User[] }) => {
-    const handleEnableUser = async (user: User) => {
-        const updatedUser = await prisma.user.update({
-            where: {
-                id: user.id as number,
-            },
-            data: {
-                enabled: true,
-            },
-        });
-        console.log(updatedUser);
-    };
 
     const getUserType = async (user: User) => {
         const userType = await prisma.userType.findUnique({
@@ -36,7 +25,7 @@ const TableUsers = ({ users }: { users: User[] }) => {
     };
 
     return (
-        <Box className="w-4/5 mx-auto p-4">
+        <Box className="md:w-4/5 mx-auto md:p-4">
             <Table>
                 <TableCaption>
                     Usuarios registrados en la plataforma

@@ -5,13 +5,16 @@ import NoSession from "@/components/NoSession";
 
 const ProfilePage = async () => {
     const session = await getServerSession();
+    if (!session?.user) {
+        return <NoSession />;
+    }
+
     return (
-        <Section className="p-4">
+        <Section>
             <Container>
-                <Box>{session 
-                            ? <ProfileForm />
-                            :   <NoSession />
-                        }</Box>
+                <Box>
+                    <ProfileForm />
+                </Box>
             </Container>
         </Section>
     );

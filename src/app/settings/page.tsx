@@ -1,10 +1,14 @@
 import { getServerSession } from "next-auth";
 import prisma from "@/lib/prima";
+import NoSession from "@/components/NoSession";
 import { Box, Container, Section } from "@radix-ui/themes";
 import TableUsers from "@/components/TableUsers";
 
 const SettingsPage = async () => {
     const session = await getServerSession();
+    if (!session?.user) {
+        return <NoSession />;
+    }
 
     const user = await prisma.user.findUnique({
         where: {
@@ -20,11 +24,9 @@ const SettingsPage = async () => {
 
     const getAllUsers = await prisma.user.findMany();
 
-    console.log(userType?.name);
-
     return (
         <Section>
-            <Container className="p-4">
+            <Container className="md:p-4">
                 <Box>
                     {userType?.name === "Administrator" && (
                         <TableUsers users={getAllUsers} />

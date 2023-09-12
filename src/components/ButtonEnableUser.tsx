@@ -4,25 +4,45 @@ import axios from "axios";
 import { Button } from "./ui/button";
 import { User } from "@prisma/client";
 import { CheckCircledIcon } from "@radix-ui/react-icons";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "./ui/tooltip";
+import { useRouter } from "next/navigation";
 
 const ButtonEnableUser = ({ user }: { user: User }) => {
+    const Router = useRouter();
+
     const handleSubmit = async () => {
-        console.log(user.id)
-        const response = await axios.post("/api/user/enable", {
-            id: user.id,
-        });
-        console.log(response);
+        await axios
+            .post("/api/users/enable", {
+                id: user.id,
+            })
+            .then(() => {
+                Router.refresh();
+            });
     };
 
     return (
-        <Button
-            disabled={!user.enabled}
-            value={user?.id}
-            variant={"secondary"}
-            onClick={handleSubmit}
-        >
-            <CheckCircledIcon />
-        </Button>
+        <TooltipProvider delayDuration={100}>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Button
+                        disabled={user.enabled}
+                        value={user?.id}
+                        variant={"secondary"}
+                        onClick={handleSubmit}
+                    >
+                        <CheckCircledIcon />
+                    </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>Habilitar usuario</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     );
 };
 

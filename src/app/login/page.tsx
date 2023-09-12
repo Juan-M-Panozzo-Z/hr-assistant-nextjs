@@ -60,7 +60,7 @@ const Login = () => {
 
     return (
         <Section className="min-h-screen grid place-items-center">
-            <Container className="rounded-xl border p-6 shadow-md">
+            <Container className="rounded-xl border p-6 shadow-md w-80">
                 <h1 className="text-2xl font-bold">Iniciar sesión</h1>
                 <Form {...form}>
                     <form

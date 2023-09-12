@@ -12,121 +12,121 @@ import {
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { EnterIcon, ExitIcon, TableIcon } from "@radix-ui/react-icons";
 
 const sampleData = [
     {
         name: "Juan",
         lastname: "Perez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Juan",
         lastname: "Perez",
-        CheckType: "Out",
-        CheckDate: "2021-10-10",
-        CheckTime: "18:00:00",
+        checkType: "Out",
+        createdAt: "2021-10-10",
     },
     {
         name: "Ricardo",
         lastname: "Perez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Alfonzo",
         lastname: "Gonzalez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Juan",
         lastname: "Perez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Juan",
         lastname: "Perez",
-        CheckType: "Out",
-        CheckDate: "2021-10-10",
-        CheckTime: "18:00:00",
+        checkType: "Out",
+        createdAt: "2021-10-10",
     },
     {
         name: "Ricardo",
         lastname: "Perez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Alfonzo",
         lastname: "Gonzalez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Juan",
         lastname: "Perez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Juan",
         lastname: "Perez",
-        CheckType: "Out",
-        CheckDate: "2021-10-10",
-        CheckTime: "18:00:00",
+        checkType: "Out",
+        createdAt: "2021-10-10",
     },
     {
         name: "Ricardo",
         lastname: "Perez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Alfonzo",
         lastname: "Gonzalez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Juan",
         lastname: "Perez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Juan",
         lastname: "Perez",
-        CheckType: "Out",
-        CheckDate: "2021-10-10",
-        CheckTime: "18:00:00",
+        checkType: "Out",
+        createdAt: "2021-10-10",
     },
     {
         name: "Ricardo",
         lastname: "Perez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
     {
         name: "Alfonzo",
         lastname: "Gonzalez",
-        CheckType: "In",
-        CheckDate: "2021-10-10",
-        CheckTime: "10:00:00",
+        checkType: "In",
+        createdAt: "2021-10-10",
     },
 ];
+
+const itemsPerPage = 10;
+const currentPage = 1;
+
+const indexOfLastItem = currentPage * itemsPerPage;
+const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+const currentItems = sampleData.slice(indexOfFirstItem, indexOfLastItem);
 
 const CheckInOutData = async ({ session }: any) => {
     const user = await prisma.user.findUnique({
@@ -142,41 +142,66 @@ const CheckInOutData = async ({ session }: any) => {
     });
 
     return (
-        <Container className="w-4/5 mx-auto p-4">
+        <Container className="md:w-4/5 mx-auto md:p-4">
             <Box className="flex gap-2">
                 <Input placeholder="Buscar" />
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button>Filtros</Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-44">
+                        <DropdownMenuLabel>
+                            Filtros disponibles
+                        </DropdownMenuLabel>
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem>
+                                <EnterIcon className="w-4 h-4 mr-2" />
+                                <span>Entradas</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <ExitIcon className="w-4 h-4 mr-2" />
+                                <span>Salidas</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <TableIcon className="w-4 h-4 mr-2" />
+                                <span>Todo</span>
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
                 <Button>Buscar</Button>
             </Box>
             <Container className="mt-4">
                 <Table>
-                    <TableCaption>Check In/Out Data</TableCaption>
+                    <TableCaption>
+                        Registros de Entrada y Salida
+                        <Box className="gap-2 flex justify-end"></Box>
+                    </TableCaption>
                     <TableHeader>
                         <TableRow>
                             <TableHead>Tipo de registro</TableHead>
                             <TableHead>Nombre</TableHead>
                             <TableHead>Apellido</TableHead>
-                            <TableHead>Fecha</TableHead>
-                            <TableHead>Hora</TableHead>
+                            <TableHead>Fecha y hora</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {sampleData.map((data, index) => (
+                        {currentItems.map((data, index) => (
                             <TableRow key={index}>
                                 <TableCell>
                                     <Badge
                                         className={
-                                            data.CheckType === "In"
+                                            data.checkType === "In"
                                                 ? "bg-green-500"
                                                 : "bg-red-500"
                                         }
                                     >
-                                        {data.CheckType}
+                                        {data.checkType}
                                     </Badge>
                                 </TableCell>
                                 <TableCell>{data.name}</TableCell>
                                 <TableCell>{data.lastname}</TableCell>
-                                <TableCell>{data.CheckDate}</TableCell>
-                                <TableCell>{data.CheckTime}</TableCell>
+                                <TableCell>{data.createdAt}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

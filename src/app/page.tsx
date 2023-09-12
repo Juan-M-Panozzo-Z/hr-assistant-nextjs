@@ -6,17 +6,16 @@ import NoSession from "@/components/NoSession";
 
 const Home = async () => {
     const session = await getServerSession();
-
-    if (!session) {
+    if (!session?.user) {
         return <NoSession />;
-    } else {
-        return (
-            <Section className="p-4">
-                <UserData session={session} />
-                <CheckInOutData session={session} />
-            </Section>
-        );
     }
+
+    return (
+        <Section className="md:p-4">
+            <UserData session={session} />
+            <CheckInOutData session={session} />
+        </Section>
+    );
 };
 
 export default Home;

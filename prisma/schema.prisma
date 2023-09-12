@@ -34,7 +34,7 @@ model CheckInOut {
   id        Int      @id @default(autoincrement())
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
+  checkType String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   note      String?
 }

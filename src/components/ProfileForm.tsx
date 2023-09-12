@@ -3,6 +3,12 @@ import { Box, Container, Section } from "@radix-ui/themes";
 import { getServerSession } from "next-auth";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import {
+    TooltipProvider,
+    Tooltip,
+    TooltipTrigger,
+    TooltipContent,
+} from "./ui/tooltip";
 
 const ProfileForm = async () => {
     const session = await getServerSession();
@@ -19,7 +25,7 @@ const ProfileForm = async () => {
 
     return (
         <Section>
-            <Container>
+            <Container className="md:w-4/5 mx-auto p-4">
                 <div className="grid md:grid-cols-2 gap-4">
                     <InputForm label="Nombre" value={user?.name} />
                     <InputForm label="Apellido" value={user?.lastname} />
@@ -38,10 +44,25 @@ const ProfileForm = async () => {
 
 const InputForm = ({ label, value, type = "text" }: any) => {
     return (
-        <Box className="grid w-full items-center gap-2">
-            <Label htmlFor={value}>{label}</Label>
-            <Input disabled id={value} name={value} value={value} type={type} />
-        </Box>
+        <TooltipProvider delayDuration={100}>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Box className="grid w-full items-center gap-4 text-left">
+                        <Label htmlFor={value}>{label}</Label>
+                        <Input
+                            disabled
+                            id={value}
+                            name={value}
+                            value={value}
+                            type={type}
+                        />
+                    </Box>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>Actualmente no puede modificarse</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     );
 };
 
