@@ -147,7 +147,7 @@ const CheckInOutData = async ({ session }: any) => {
                 <Input placeholder="Buscar" />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button>Filtros</Button>
+                        <Button variant={"ghost"}>Filtros</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-44">
                         <DropdownMenuLabel>
