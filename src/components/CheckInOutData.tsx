@@ -1,4 +1,5 @@
-import { Box, Container, Flex } from "@radix-ui/themes";
+import prisma from "@/lib/prima";
+import { Box, Container } from "@radix-ui/themes";
 import {
     Table,
     TableHeader,
@@ -127,7 +128,19 @@ const sampleData = [
     },
 ];
 
-const CheckInOutData = () => {
+const CheckInOutData = async ({ session }: any) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            email: session.user.email,
+        },
+    });
+
+    const userType = await prisma.userType.findUnique({
+        where: {
+            id: user?.typeId,
+        },
+    });
+
     return (
         <Container className="w-4/5 mx-auto p-4">
             <Box className="flex gap-2">

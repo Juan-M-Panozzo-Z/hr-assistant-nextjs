@@ -57,10 +57,8 @@ const Login = () => {
                     message: "Verifica tu contraseña",
                 });
             }
-        });
-        if (status === "authenticated") {
             router.push("/");
-        }
+        });
     };
 
     return (

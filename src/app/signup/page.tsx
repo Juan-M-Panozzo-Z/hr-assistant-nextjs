@@ -30,6 +30,9 @@ const formSchema = z.object({
     password: z
         .string()
         .min(8, { message: "La contraseña debe tener al menos 8 caracteres" }),
+    legajo: z.number().positive({
+        message: "El legajo debe ser un número positivo",
+    }),
 });
 
 const Register = () => {
@@ -42,6 +45,7 @@ const Register = () => {
             lastname: "",
             email: "",
             password: "",
+            legajo: 0,
         },
     });
 
@@ -90,6 +94,22 @@ const Register = () => {
                                     <FormControl>
                                         <Input
                                             placeholder="Apellido"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="legajo"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Legajo</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Legajo"
                                             {...field}
                                         />
                                     </FormControl>

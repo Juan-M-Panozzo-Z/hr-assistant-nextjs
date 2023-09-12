@@ -13,10 +13,12 @@ model User {
   name       String
   lastname   String
   password   String
+  enabled    Boolean      @default(false)
+  legajo     Int          @unique
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
-  typeId     Int         @default(2)
-  type       UserType    @relation(fields: [typeId], references: [id])
+  typeId     Int          @default(2)
+  type       UserType     @relation(fields: [typeId], references: [id])
   checkInOut CheckInOut[]
 }
 

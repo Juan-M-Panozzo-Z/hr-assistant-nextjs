@@ -27,6 +27,7 @@ export async function POST(req: Request) {
             data: {
                 name,
                 lastname,
+                legajo: 0,
                 email: email.toLowerCase(),
                 password: hashedPassword,
             },

@@ -5,11 +5,14 @@ CREATE TABLE `User` (
     `name` VARCHAR(191) NOT NULL,
     `lastname` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
+    `enabled` BOOLEAN NOT NULL DEFAULT false,
+    `legajo` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
-    `typeId` INTEGER NOT NULL DEFAULT 1,
+    `typeId` INTEGER NOT NULL DEFAULT 2,
 
     UNIQUE INDEX `User_email_key`(`email`),
+    UNIQUE INDEX `User_legajo_key`(`legajo`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

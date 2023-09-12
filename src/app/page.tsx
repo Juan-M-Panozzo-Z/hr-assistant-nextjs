@@ -1,25 +1,17 @@
-"use client";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import Navbar from "../components/Navbar";
+import { getServerSession } from "next-auth";
 import UserData from "@/components/UserData";
 import CheckInOutData from "@/components/CheckInOutData";
+import { Section } from "@radix-ui/themes";
 
-export default function Home() {
-    const { status } = useSession();
-    const router = useRouter();
+const Home = async () => {
+    const session = await getServerSession();
 
-    if (status === "unauthenticated") {
-        router.push("/login");
-    }
+    return (
+        <Section className="p-4">
+            <UserData session={session} />
+            <CheckInOutData session={session} />
+        </Section>
+    );
+};
 
-    if (status === "authenticated") {
-        return (
-            <div className="">
-                <Navbar />
-                <UserData />
-                <CheckInOutData />
-            </div>
-        );
-    }
-}
+export default Home;

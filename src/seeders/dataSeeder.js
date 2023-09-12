@@ -22,6 +22,8 @@ async function main() {
             lastname: "Panozzo Zenere",
             email: "jmpz.94@gmail.com",
             password: await bcrypt.hash("34584024", 10),
+            enabled: true,
+            legajo: 1,
             typeId: 1,
         },
     });
