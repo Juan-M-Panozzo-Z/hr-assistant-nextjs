@@ -3,6 +3,7 @@ import { Box, Container } from "@radix-ui/themes";
 import { Badge } from "./ui/badge";
 
 const UserData = async ({ session }: any) => {
+
     const user = await prisma.user.findUnique({
         where: {
             email: session.user.email,

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import * as z from "zod";
@@ -30,8 +29,6 @@ const formSchema = z.object({
 });
 
 const Login = () => {
-    const { status } = useSession();
-    const router = useRouter();
     const [error, setError] = useState(null);
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -57,7 +54,7 @@ const Login = () => {
                     message: "Verifica tu contraseña",
                 });
             }
-            router.push("/");
+            window.location.href = "/";
         });
     };
 

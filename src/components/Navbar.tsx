@@ -57,7 +57,7 @@ export const Navbar = () => {
                             label="Perfil"
                         />
                         <NavItem
-                            href="#"
+                            href="/settings"
                             Icon={<GearIcon />}
                             label="Configuraciones"
                         />
