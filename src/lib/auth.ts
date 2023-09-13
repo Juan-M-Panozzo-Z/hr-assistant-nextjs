@@ -34,7 +34,8 @@ export const authOptions: NextAuthOptions = {
                 });
                 if (
                     user &&
-                    bcrypt.compareSync(credentials.password, user.password)
+                    bcrypt.compareSync(credentials.password, user.password) &&
+                    user.enabled
                 ) {
                     return Promise.resolve(user as any);
                 } else {
