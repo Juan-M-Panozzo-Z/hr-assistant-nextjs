@@ -26,7 +26,8 @@ const TableUsers = ({ users }: { users: User[] }) => {
 
     return (
         <Box className="md:w-4/5 mx-auto md:p-4">
-            <Table>
+            <h2 className="text-xl ">Usuarios</h2>
+            <Table className="mt-4">
                 <TableCaption>
                     <span>
                         Los usuarios que se encuentran marcados con{" "}

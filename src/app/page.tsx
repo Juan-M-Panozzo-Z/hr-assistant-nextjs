@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth";
 import UserData from "@/components/UserData";
-import CheckInOutData from "@/components/CheckInOutData";
 import { Section } from "@radix-ui/themes";
 import NoSession from "@/components/NoSession";
 import { CheckinoutDataTable } from "@/components/CheckinoutDataTable";
@@ -14,7 +13,6 @@ const Home = async () => {
     return (
         <Section className="md:p-4">
             <UserData session={session} />
-            {/* <CheckInOutData session={session} /> */}
             <CheckinoutDataTable />
         </Section>
     );

@@ -3,6 +3,7 @@ import prisma from "@/lib/prima";
 import NoSession from "@/components/NoSession";
 import { Box, Container, Section } from "@radix-ui/themes";
 import TableUsers from "@/components/TableUsers";
+import SettingsUsers from "@/components/SettingsUsers";
 
 const SettingsPage = async () => {
     const session = await getServerSession();
@@ -31,6 +32,9 @@ const SettingsPage = async () => {
                     {userType?.name === "Administrator" && (
                         <TableUsers users={getAllUsers} />
                     )}
+                </Box>
+                <Box>
+                    <SettingsUsers />
                 </Box>
             </Container>
         </Section>
