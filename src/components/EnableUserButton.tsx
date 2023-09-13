@@ -3,7 +3,7 @@
 import axios from "axios";
 import { Button } from "./ui/button";
 import { User } from "@prisma/client";
-import { CheckCircledIcon } from "@radix-ui/react-icons";
+import { CheckIcon, QuestionMarkIcon } from "@radix-ui/react-icons";
 import {
     Tooltip,
     TooltipContent,
@@ -32,10 +32,15 @@ const EnableUserButton = ({ user }: { user: User }) => {
                     <Button
                         disabled={user.enabled}
                         value={user?.id}
+                        size={"sm"}
                         variant={"secondary"}
                         onClick={handleSubmit}
                     >
-                        <CheckCircledIcon />
+                        {user.enabled ? (
+                            <CheckIcon color="green" />
+                        ) : (
+                            <QuestionMarkIcon color="red" />
+                        )}
                     </Button>
                 </TooltipTrigger>
                 <TooltipContent>

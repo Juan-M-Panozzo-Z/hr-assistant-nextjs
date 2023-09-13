@@ -27,7 +27,11 @@ const TableUsers = ({ users }: { users: User[] }) => {
         <Box className="md:w-4/5 mx-auto md:p-4">
             <Table>
                 <TableCaption>
-                    Usuarios registrados en la plataforma
+                    Los usuarios que se encuentran en{" "}
+                    <Badge className="bg-red-500/40 px-2 text-primary">
+                        rojo
+                    </Badge>{" "}
+                    estan sin habilitar
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
@@ -42,7 +46,12 @@ const TableUsers = ({ users }: { users: User[] }) => {
                 </TableHeader>
                 <TableBody>
                     {users.map((user) => (
-                        <TableRow key={user.id}>
+                        <TableRow
+                            key={user.id}
+                            className={
+                                (!user.enabled as Boolean) && "bg-red-500/40"
+                            }
+                        >
                             <TableCell className="text-left">
                                 <Badge variant={"secondary"}>
                                     {getUserType(user).then((res) => {
