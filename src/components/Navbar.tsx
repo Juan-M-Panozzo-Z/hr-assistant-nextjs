@@ -1,12 +1,9 @@
-"use client";
-
 import React, { ReactNode } from "react";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { PersonIcon, HomeIcon, GearIcon } from "@radix-ui/react-icons";
 import { Box, Text } from "@radix-ui/themes";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
-import { Button } from "./ui/button";
+import SignOutButton from "./SignOutButton";
 
 const Nav = ({ children }: { children: ReactNode }) => {
     return <ul className="flex gap-2">{children}</ul>;
@@ -34,10 +31,10 @@ const NavItem = ({
     );
 };
 
-export const Navbar = () => {
-    const { status } = useSession();
+export const Navbar = async () => {
+    const session = await getServerSession();
 
-    if (status === "authenticated") {
+    if (session !== null) {
         return (
             <Box
                 position="fixed"
@@ -46,7 +43,7 @@ export const Navbar = () => {
             >
                 <Box className="flex gap-1 items-center mr-auto">
                     <PersonIcon className="w-6 h-6 rounded-full" />
-                    <h1 className="md:text-xl font-semibold">HR Assistant</h1>
+                    <h1 className="hidden md:inline md:text-xl font-semibold">HR Assistant</h1>
                 </Box>
                 <Box className="mx-auto">
                     <Nav>
@@ -64,9 +61,7 @@ export const Navbar = () => {
                     </Nav>
                 </Box>
                 <Box className="ml-auto">
-                    <Button size={"sm"} onClick={() => signOut()}>
-                        Cerrar sesión
-                    </Button>
+                    <SignOutButton />
                 </Box>
             </Box>
         );

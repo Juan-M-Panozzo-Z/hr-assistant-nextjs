@@ -11,10 +11,9 @@ import {
     TableRow,
 } from "./ui/table";
 import { Badge } from "./ui/badge";
-import ButtonEnableUser from "./ButtonEnableUser";
+import EnableUserButton from "./EnableUserButton";
 
 const TableUsers = ({ users }: { users: User[] }) => {
-
     const getUserType = async (user: User) => {
         const userType = await prisma.userType.findUnique({
             where: {
@@ -59,7 +58,7 @@ const TableUsers = ({ users }: { users: User[] }) => {
                                 {user.createdAt.toLocaleString()}
                             </TableCell>
                             <TableCell className="flex gap-1 items-center">
-                                <ButtonEnableUser user={user} />
+                                <EnableUserButton user={user} />
                             </TableCell>
                         </TableRow>
                     ))}

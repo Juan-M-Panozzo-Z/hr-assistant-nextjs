@@ -12,7 +12,7 @@ import {
 } from "./ui/tooltip";
 import { useRouter } from "next/navigation";
 
-const ButtonEnableUser = ({ user }: { user: User }) => {
+const EnableUserButton = ({ user }: { user: User }) => {
     const Router = useRouter();
 
     const handleSubmit = async () => {
@@ -46,4 +46,4 @@ const ButtonEnableUser = ({ user }: { user: User }) => {
     );
 };
 
-export default ButtonEnableUser;
+export default EnableUserButton;
