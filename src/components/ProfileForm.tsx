@@ -9,6 +9,7 @@ import {
     TooltipTrigger,
     TooltipContent,
 } from "./ui/tooltip";
+import Image from "next/image";
 
 const ProfileForm = async () => {
     const session = await getServerSession();
@@ -27,6 +28,15 @@ const ProfileForm = async () => {
         <Section>
             <Container className="md:w-4/5 mx-auto p-4">
                 <div className="grid md:grid-cols-2 gap-4">
+                    <Box className="md:col-span-2 mx-auto">
+                        <Image
+                            src={"/avatar/sample.jpg"}
+                            alt="user image"
+                            width={200}
+                            height={200}
+                            className="rounded-full"
+                        />
+                    </Box>
                     <InputForm label="Nombre" value={user?.name} />
                     <InputForm label="Apellido" value={user?.lastname} />
                     <InputForm label="Email" value={user?.email} />

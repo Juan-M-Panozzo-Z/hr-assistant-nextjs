@@ -6,7 +6,12 @@ import { LockClosedIcon } from "@radix-ui/react-icons";
 
 const SignOutButton = () => {
     return (
-        <Button size={"sm"} onClick={() => signOut()} className="gap-1">
+        <Button
+            size={"sm"}
+            variant={"ghost"}
+            onClick={() => signOut()}
+            className="gap-1 justify-center w-full"
+        >
             <LockClosedIcon className="w-4 h-4" />
             <span className="hidden md:inline">Cerrar sesión</span>
         </Button>

@@ -12,6 +12,7 @@ import {
 } from "./ui/table";
 import { Badge } from "./ui/badge";
 import EnableUserButton from "./EnableUserButton";
+import { QuestionMarkIcon } from "@radix-ui/react-icons";
 
 const TableUsers = ({ users }: { users: User[] }) => {
     const getUserType = async (user: User) => {
@@ -27,11 +28,14 @@ const TableUsers = ({ users }: { users: User[] }) => {
         <Box className="md:w-4/5 mx-auto md:p-4">
             <Table>
                 <TableCaption>
-                    Los usuarios que se encuentran en{" "}
-                    <Badge className="bg-red-500/40 px-2 text-primary">
-                        rojo
-                    </Badge>{" "}
-                    estan sin habilitar
+                    <span>
+                        Los usuarios que se encuentran marcados con{" "}
+                        <QuestionMarkIcon
+                            color="red"
+                            className="inline w-3 h-3"
+                        />{" "}
+                        estan sin habilitar
+                    </span>
                 </TableCaption>
                 <TableHeader>
                     <TableRow>
@@ -41,17 +45,12 @@ const TableUsers = ({ users }: { users: User[] }) => {
                         <TableHead>Apellido</TableHead>
                         <TableHead>Correo Electronico</TableHead>
                         <TableHead>Fecha de Registro</TableHead>
-                        <TableHead>Acciones</TableHead>
+                        <TableHead>Habilitado</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {users.map((user) => (
-                        <TableRow
-                            key={user.id}
-                            className={
-                                (!user.enabled as Boolean) && "bg-red-500/40"
-                            }
-                        >
+                        <TableRow key={user.id}>
                             <TableCell className="text-left">
                                 <Badge variant={"secondary"}>
                                     {getUserType(user).then((res) => {

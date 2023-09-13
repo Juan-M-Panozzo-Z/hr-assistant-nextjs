@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PersonIcon, HomeIcon, GearIcon } from "@radix-ui/react-icons";
 import { Box, Text } from "@radix-ui/themes";
 import SignOutButton from "./SignOutButton";
+import AvatarNavbar from "./Avatar";
 
 const Nav = ({ children }: { children: ReactNode }) => {
     return <ul className="flex gap-2">{children}</ul>;
@@ -60,8 +61,8 @@ export const Navbar = async () => {
                         />
                     </Nav>
                 </Box>
-                <Box className="ml-auto">
-                    <SignOutButton />
+                <Box className="ml-auto flex gap-1 items-center">
+                    <AvatarNavbar />
                 </Box>
             </Box>
         );
