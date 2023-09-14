@@ -1,15 +1,15 @@
 "use client";
 
 import { Box, Container } from "@radix-ui/themes";
-import { Switch } from "./ui/switch";
-import { Label } from "./ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-} from "./ui/tooltip";
+} from "../../../components/ui/tooltip";
 
 const SwitchComponent = ({
     id,
@@ -45,7 +45,7 @@ const SwitchComponent = ({
 
 const SettingsUsers = () => {
     return (
-        <Container className="md:w-4/5 mx-auto md:p-4">
+        <Container className="md:w-4/5 mx-auto p-4 mt-4">
             <h2 className="text-xl ">Parametros del sistema</h2>
             <Box className="grid grid-cols-2 gap-4 mt-4">
                 <SwitchComponent

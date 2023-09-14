@@ -39,11 +39,12 @@ import { getRandomDate } from "@/lib/generateRandomDate";
 export type Checkinout = {
     id: number;
     userId: number;
-    userName: string;
-    userLastname: string;
-    userLegajo: number;
-    userEmail: string;
-    registroFecha: string;
+    nombre: string;
+    apellido: string;
+    legajo: number;
+    sector: number;
+    email: string;
+    date: string;
     registro: number;
 };
 
@@ -51,301 +52,331 @@ const data: Checkinout[] = [
     {
         id: 1,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 2,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 3,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 4,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 5,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 6,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 1,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 2,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 3,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 4,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 5,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 6,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 1,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 2,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 3,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 4,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 5,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 6,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 1,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 2,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 3,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 4,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 5,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 6,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 1,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 2,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 3,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 1,
     },
     {
         id: 4,
         userId: 1,
-        userName: "Juan",
-        userLastname: "Perez",
-        userLegajo: 1234,
-        userEmail: "ejemplo@ejemplo.com",
-        registroFecha: getRandomDate(),
+        nombre: "Juan",
+        apellido: "Perez",
+        legajo: 1234,
+        sector: 1,
+        email: "ejemplo@ejemplo.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 5,
         userId: 2,
-        userName: "Rafael",
-        userLastname: "Nadal",
-        userLegajo: 1235,
-        userEmail: "rafael@nadal.com",
-        registroFecha: getRandomDate(),
+        nombre: "Rafael",
+        apellido: "Nadal",
+        legajo: 1235,
+        sector: 1,
+        email: "rafael@nadal.com",
+        date: getRandomDate(),
         registro: 2,
     },
     {
         id: 6,
         userId: 3,
-        userName: "Roger",
-        userLastname: "Federer",
-        userLegajo: 1236,
-        userEmail: "roger@federer.com",
-        registroFecha: getRandomDate(),
+        nombre: "Roger",
+        apellido: "Federer",
+        legajo: 1236,
+        sector: 1,
+        email: "roger@federer.com",
+        date: getRandomDate(),
         registro: 2,
     },
 ];
@@ -373,7 +404,7 @@ export const columns: ColumnDef<Checkinout>[] = [
         enableHiding: false,
     },
     {
-        accessorKey: "userLegajo",
+        accessorKey: "legajo",
         header: ({ column }) => {
             return (
                 <Button
@@ -387,10 +418,27 @@ export const columns: ColumnDef<Checkinout>[] = [
                 </Button>
             );
         },
-        cell: ({ row }) => <div>{row.getValue("userLegajo")}</div>,
+        cell: ({ row }) => <div>{row.getValue("legajo")}</div>,
     },
     {
-        accessorKey: "userName",
+        accessorKey: "sector",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant={"ghost"}
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === "asc")
+                    }
+                >
+                    Sector
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            );
+        },
+        cell: ({ row }) => <div>{row.getValue("sector")}</div>,
+    },
+    {
+        accessorKey: "nombre",
         header: ({ column }) => {
             return (
                 <Button
@@ -405,11 +453,11 @@ export const columns: ColumnDef<Checkinout>[] = [
             );
         },
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("userName")}</div>
+            <div className="capitalize">{row.getValue("nombre")}</div>
         ),
     },
     {
-        accessorKey: "userLastname",
+        accessorKey: "apellido",
         header: ({ column }) => {
             return (
                 <Button
@@ -424,11 +472,11 @@ export const columns: ColumnDef<Checkinout>[] = [
             );
         },
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("userLastname")}</div>
+            <div className="capitalize">{row.getValue("apellido")}</div>
         ),
     },
     {
-        accessorKey: "registroFecha",
+        accessorKey: "date",
         header: ({ column }) => {
             return (
                 <Button
@@ -443,7 +491,7 @@ export const columns: ColumnDef<Checkinout>[] = [
             );
         },
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("registroFecha")}</div>
+            <div className="capitalize">{row.getValue("date")}</div>
         ),
     },
     {
@@ -493,22 +541,37 @@ export const CheckinoutDataTable = () => {
     });
 
     return (
-        <Box className="overflow-x-auto md:w-4/5 mx-auto">
-            <Box className="flex items-center py-4 gap-2">
-                <Input
-                    className="w-full"
-                    placeholder="Ingresar apellido"
-                    value={
-                        (table
-                            .getColumn("userLastname")
-                            ?.getFilterValue() as string) || ""
-                    }
-                    onChange={(e) =>
-                        table
-                            .getColumn("userLastname")
-                            ?.setFilterValue(e.target.value)
-                    }
-                />
+        <Box className="overflow-x-auto md:w-4/5 mx-auto p-4 mt-4">
+            <h2 className="text-xl ">Registro de ingreso y egreso</h2>
+            <Box className="flex items-center gap-2 my-4 mt-4">
+                <Box className="flex w-full gap-2">
+                    <Input
+                        placeholder="Ingresar apellido"
+                        value={
+                            (table
+                                .getColumn("apellido")
+                                ?.getFilterValue() as string) || ""
+                        }
+                        onChange={(e) =>
+                            table
+                                .getColumn("apellido")
+                                ?.setFilterValue(e.target.value)
+                        }
+                    />
+                    <Input
+                        placeholder="Ingresar sector"
+                        value={
+                            (table
+                                .getColumn("sector")
+                                ?.getFilterValue() as string) || ""
+                        }
+                        onChange={(e) =>
+                            table
+                                .getColumn("sector")
+                                ?.setFilterValue(e.target.value)
+                        }
+                    />
+                </Box>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant={"outline"} className="ml-auto">

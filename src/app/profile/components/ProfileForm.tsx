@@ -1,14 +1,14 @@
 import prisma from "@/lib/prima";
 import { Box, Container, Section } from "@radix-ui/themes";
 import { getServerSession } from "next-auth";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { Input } from "../../../components/ui/input";
+import { Label } from "../../../components/ui/label";
 import {
     TooltipProvider,
     Tooltip,
     TooltipTrigger,
     TooltipContent,
-} from "./ui/tooltip";
+} from "../../../components/ui/tooltip";
 import Image from "next/image";
 
 const ProfileForm = async () => {
@@ -24,9 +24,15 @@ const ProfileForm = async () => {
         },
     });
 
+    const sector = await prisma.sector.findUnique({
+        where: {
+            id: user?.sectorId as number,
+        },
+    });
+
     return (
         <Section>
-            <Container className="md:w-4/5 mx-auto p-4">
+            <Container className="md:w-4/5 mx-auto p-4 mt-4">
                 <div className="grid md:grid-cols-2 gap-4">
                     <Box className="md:col-span-2 mx-auto">
                         <Image
@@ -42,6 +48,7 @@ const ProfileForm = async () => {
                     <InputForm label="Email" value={user?.email} />
                     <InputForm label="Legajo" value={user?.legajo} />
                     <InputForm label="Tipo de usuario" value={type?.name} />
+                    <InputForm label="Sector" value={sector?.name} />
                     <InputForm
                         label="usuario creado"
                         value={user?.createdAt.toLocaleString()}

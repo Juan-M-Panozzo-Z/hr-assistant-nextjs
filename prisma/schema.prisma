@@ -13,13 +13,15 @@ model User {
   name       String
   lastname   String
   password   String
-  enabled    Boolean      @default(false)
   legajo     Int          @unique
+  sectorId   Int          @default(1)
+  sector     Sector       @relation(fields: [sectorId], references: [id])
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
   typeId     Int          @default(2)
   type       UserType     @relation(fields: [typeId], references: [id])
   checkInOut CheckInOut[]
+  enabled    Boolean      @default(false)
 }
 
 model UserType {
@@ -37,4 +39,14 @@ model CheckInOut {
   checkType String
   createdAt DateTime @default(now())
   note      String?
+}
+
+model Sector {
+  id         Int      @id @default(autoincrement())
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  users      User[]
+  isChildren Boolean  @default(false)
+  parentId   Int?
 }

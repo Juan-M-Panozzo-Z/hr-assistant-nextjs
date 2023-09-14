@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { Button } from "./ui/button";
+import { Button } from "../../../components/ui/button";
 import { User } from "@prisma/client";
 import { CheckIcon, QuestionMarkIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
@@ -10,10 +10,12 @@ import {
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
+    AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
+    AlertDialogTitle,
     AlertDialogTrigger,
-} from "./ui/alert-dialog";
+} from "../../../components/ui/alert-dialog";
 
 const EnableUserButton = ({ user }: { user: User }) => {
     const Router = useRouter();
@@ -46,9 +48,12 @@ const EnableUserButton = ({ user }: { user: User }) => {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogHeader>
+                    <AlertDialogTitle>
                         ¿Desea habilitar al usuario?
-                    </AlertDialogHeader>
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                        Una vez habilitado, el usuario podrá ingresar al sistema
+                    </AlertDialogDescription>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancelar</AlertDialogCancel>
                         <AlertDialogAction onClick={handleSubmit}>

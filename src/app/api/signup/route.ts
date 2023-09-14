@@ -28,6 +28,7 @@ export async function POST(req: Request) {
                 name,
                 lastname,
                 legajo,
+                sectorId: 1,
                 email: email.toLowerCase(),
                 password: hashedPassword,
             },

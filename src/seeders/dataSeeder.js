@@ -16,10 +16,18 @@ async function main() {
         },
     });
 
+    await prisma.sector.create({
+        data: {
+            name: "Sin Sector",
+            isChildren: false,
+        },
+    });
+
     await prisma.user.create({
         data: {
             name: "Juan Manuel",
             lastname: "Panozzo Zenere",
+            sectorId: 1,
             email: "jmpz.94@gmail.com",
             password: await bcrypt.hash("34584024", 10),
             enabled: true,

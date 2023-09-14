@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { Container, Box, Section, Text } from "@radix-ui/themes";
-import ProfileForm from "../../components/ProfileForm";
+import ProfileForm from "./components/ProfileForm";
 import NoSession from "@/components/NoSession";
 
 const ProfilePage = async () => {
