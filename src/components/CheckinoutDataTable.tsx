@@ -517,12 +517,13 @@ export const CheckinoutDataTable = () => {
         {}
     );
     const [rowSelection, setRowSelection] = useState({});
+    // solo se obtienen los numeros de legajo, con esto hay que buscar los datos de cada usuario
+    const [checkinout, setCheckinout] = useState([]);
     const [data, setData] = useState<Checkinout[]>([]);
 
     useEffect(() => {
         axios.get("/api/checkinout").then((res) => {
-            console.log(res.data);
-            setData(res.data);
+            setCheckinout(res.data);
         });
     }, []);
 

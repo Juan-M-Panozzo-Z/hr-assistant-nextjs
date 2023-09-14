@@ -32,15 +32,6 @@ model UserType {
   users     User[]
 }
 
-model CheckInOut {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  checkType String
-  createdAt DateTime @default(now())
-  note      String?
-}
-
 model Sector {
   id         Int      @id @default(autoincrement())
   name       String
@@ -49,4 +40,13 @@ model Sector {
   users      User[]
   isChildren Boolean  @default(false)
   parentId   Int?
+}
+
+model CheckInOut {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  checkType String
+  createdAt DateTime @default(now())
+  note      String?
 }

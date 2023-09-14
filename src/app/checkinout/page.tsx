@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { Section, Box, Container } from "@radix-ui/themes";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,8 +10,15 @@ const checkinoutPage = () => {
     const [legajo, setLegajo] = useState("");
 
     const handleSubmit = () => {
-        console.log(legajo);
-        setLegajo("");
+        axios
+            .post("/api/checkinout/create", { legajo })
+            .then((res) => {
+                console.log(res);
+                setLegajo("");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -19,7 +27,7 @@ const checkinoutPage = () => {
                 <Box>
                     <Input
                         placeholder="Ingresa tu Legajo"
-                        className="h-24 text-2xl"
+                        className="h-16 sm:h-24 text-2xl"
                         value={legajo}
                         onChange={(e) => setLegajo(e.target.value)}
                     />
@@ -30,7 +38,7 @@ const checkinoutPage = () => {
                             value={i}
                             onClick={() => setLegajo(legajo + i)}
                             key={i}
-                            className="col-span-1 w-36 h-36"
+                            className="col-span-1 w-24 md:w-36 h-16 sm:h-24 md:h-32 aspect-square mx-auto"
                         >
                             <span className="text-4xl font-bold">{i}</span>
                         </Button>
@@ -40,11 +48,14 @@ const checkinoutPage = () => {
                     <Button
                         onClick={() => setLegajo(legajo.slice(0, -1))}
                         variant={"secondary"}
-                        className="w-full h-36"
+                        className="w-full h-16 sm:h-24 md:h-32 aspect-square mx-auto"
                     >
                         <span className="text-4xl font-bold">Borrar</span>
                     </Button>
-                    <Button onClick={handleSubmit} className="w-full h-36">
+                    <Button
+                        onClick={handleSubmit}
+                        className="w-full h-16 sm:h-24 md:h-32 aspect-square mx-auto"
+                    >
                         <span className="text-4xl font-bold">Ingresar</span>
                     </Button>
                 </Box>
