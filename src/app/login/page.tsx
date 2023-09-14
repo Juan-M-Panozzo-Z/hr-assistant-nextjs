@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import * as z from "zod";
@@ -53,8 +52,9 @@ const Login = () => {
                 form.setError("password", {
                     message: "Verifica tu contraseña",
                 });
+            } else {
+                window.location.href = "/";
             }
-            window.location.href = "/";
         });
     };
 

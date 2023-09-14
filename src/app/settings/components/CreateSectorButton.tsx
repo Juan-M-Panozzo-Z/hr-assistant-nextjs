@@ -46,7 +46,6 @@ const FormSchema = z.object({
 
 const CreateSectorButton = () => {
     const Router = useRouter();
-    const { register } = useForm();
     const [sectors, setSectors] = useState([] as Sector[]);
 
     const form = useForm<z.infer<typeof FormSchema>>({

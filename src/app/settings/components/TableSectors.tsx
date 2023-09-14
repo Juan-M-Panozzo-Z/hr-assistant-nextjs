@@ -1,4 +1,3 @@
-
 import prisma from "@/lib/prima";
 import { Box } from "@radix-ui/themes";
 import {
@@ -16,6 +15,19 @@ import CreateSectorButton from "./CreateSectorButton";
 const TableSectors = async () => {
     const getAllSectors = await prisma.sector.findMany();
 
+    const getUniqueSector = async (sectorId: number) => {
+        try {
+          const sector = await prisma.sector.findFirst({
+            where: {
+              id: sectorId,
+            },
+          });
+            return sector;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <Box className="overflow-x-auto md:w-4/5 mx-auto p-4 mt-4">
             <Box className="flex items-center justify-between">
@@ -32,7 +44,7 @@ const TableSectors = async () => {
                             <TableHead>ID</TableHead>
                             <TableHead>Nombre</TableHead>
                             <TableHead>Fecha y hora de creación</TableHead>
-                            <TableHead>ID Padre</TableHead>
+                            <TableHead>Sector Padre</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -49,9 +61,11 @@ const TableSectors = async () => {
                                 </TableCell>
                                 <TableCell className="text-left">
                                     <Badge variant={"secondary"}>
-                                        {
-                                            sector.parentId || "No tiene padre"
-                                        }
+                                        {getUniqueSector(
+                                            sector.parentId as number
+                                        ).then((res) => {
+                                            return res?.name || "No tiene";
+                                        })}
                                     </Badge>
                                 </TableCell>
                             </TableRow>
