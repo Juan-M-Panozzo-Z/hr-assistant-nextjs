@@ -15,7 +15,7 @@ import CreateSectorButton from "./CreateSectorButton";
 const TableSectors = async () => {
     const getAllSectors = await prisma.sector.findMany();
 
-    const getUniqueSector = async (sectorId: number) => {
+    const getUniqueSector = async (sectorId = 1 as number) => {
         try {
           const sector = await prisma.sector.findFirst({
             where: {
