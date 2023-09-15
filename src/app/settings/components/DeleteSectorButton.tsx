@@ -2,8 +2,7 @@
 
 import axios from "axios";
 import { Button } from "../../../components/ui/button";
-import { User } from "@prisma/client";
-import { CheckIcon, QuestionMarkIcon } from "@radix-ui/react-icons";
+import { TrashIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import {
     AlertDialog,
@@ -16,16 +15,17 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "../../../components/ui/alert-dialog";
+import { Sector } from "@prisma/client";
 
-const EnableUserButton = ({ user }: { user: User }) => {
+const DeleteSectorButton = ({ sector }: { sector: Sector }) => {
     const Router = useRouter();
 
     const handleSubmit = async () => {
         await axios
-            .post("/api/users/enable", {
-                id: user.id,
+            .post("/api/sectors/delete", {
+                id: sector.id,
             })
-            .then(() => {
+            .then((res) => {
                 Router.refresh();
             });
     };
@@ -33,31 +33,27 @@ const EnableUserButton = ({ user }: { user: User }) => {
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button
-                    disabled={user.enabled}
-                    value={user?.id}
-                    size={"sm"}
-                    variant={"ghost"}
-                >
-                    {user.enabled ? (
-                        <CheckIcon color="green" />
-                    ) : (
-                        <QuestionMarkIcon color="red" />
-                    )}
+                <Button size={"sm"} variant={"ghost"}>
+                    <TrashIcon color="red" />
                 </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>
-                        ¿Desea habilitar al usuario?
+                        ¿Desea eliminar el sector?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                        Una vez habilitado, el usuario podrá ingresar al sistema
+                        Una vez eliminado, el sector no podrá ser recuperado
+                        pero sus usuarios serán reasignados al sector padre
                     </AlertDialogDescription>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                        <AlertDialogAction onClick={handleSubmit}>
-                            Habilitar
+                        <AlertDialogAction
+                            disabled={sector.id === 1}
+                            className="bg-red-500"
+                            onClick={handleSubmit}
+                        >
+                            Elliminar
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogHeader>
@@ -66,4 +62,4 @@ const EnableUserButton = ({ user }: { user: User }) => {
     );
 };
 
-export default EnableUserButton;
+export default DeleteSectorButton;

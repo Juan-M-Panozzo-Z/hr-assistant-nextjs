@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import CreateSectorButton from "./CreateSectorButton";
 import { Sector } from "@prisma/client";
+import DeleteSectorButton from "./DeleteSectorButton";
 
 const TableSectors = async () => {
     const getAllSectors = await prisma.sector.findMany();
@@ -49,6 +50,7 @@ const TableSectors = async () => {
                             <TableHead>Nombre</TableHead>
                             <TableHead>Fecha y hora de creación</TableHead>
                             <TableHead>Sector Padre</TableHead>
+                            <TableHead>Acciones</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -71,6 +73,11 @@ const TableSectors = async () => {
                                             ) as any
                                         }
                                     </Badge>
+                                </TableCell>
+                                <TableCell className="text-left">
+                                    <DeleteSectorButton
+                                        sector={sector as Sector}
+                                    />
                                 </TableCell>
                             </TableRow>
                         ))}

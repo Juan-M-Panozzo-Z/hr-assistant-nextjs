@@ -55,6 +55,7 @@ const TableUsers = ({ users }: { users: User[] }) => {
                             <TableHead>Nombre</TableHead>
                             <TableHead>Apellido</TableHead>
                             <TableHead>Correo Electronico</TableHead>
+                            <TableHead>Telefono</TableHead>
                             <TableHead>Fecha de Registro</TableHead>
                             <TableHead>Sector</TableHead>
                             <TableHead>Habilitado</TableHead>
@@ -74,6 +75,15 @@ const TableUsers = ({ users }: { users: User[] }) => {
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.lastname}</TableCell>
                                 <TableCell>{user.email}</TableCell>
+                                <TableCell>
+                                    {user?.phone ? (
+                                        user?.phone
+                                    ) : (
+                                        <Badge variant={"secondary"}>
+                                            Sin registrar
+                                        </Badge>
+                                    )}
+                                </TableCell>
                                 <TableCell>
                                     {user.createdAt.toLocaleString()}
                                 </TableCell>

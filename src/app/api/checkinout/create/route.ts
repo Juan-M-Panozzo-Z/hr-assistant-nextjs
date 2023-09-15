@@ -20,10 +20,14 @@ export async function POST(req: Request) {
             });
         }
 
+        // que checkinout tambien me devuelva el usuario
         const checkinout = await prisma.checkInOut.create({
             data: {
                 userId: user.id,
                 checkType: "1",
+            },
+            include: {
+                user: true,
             },
         });
 

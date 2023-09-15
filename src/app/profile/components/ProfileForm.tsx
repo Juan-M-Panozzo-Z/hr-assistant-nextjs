@@ -1,6 +1,7 @@
 import prisma from "@/lib/prima";
-import { Box, Container, Section } from "@radix-ui/themes";
 import { getServerSession } from "next-auth";
+import { Box, Container, Section } from "@radix-ui/themes";
+import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import {
@@ -46,6 +47,7 @@ const ProfileForm = async () => {
                     <InputForm label="Nombre" value={user?.name} />
                     <InputForm label="Apellido" value={user?.lastname} />
                     <InputForm label="Email" value={user?.email} />
+                    <InputForm label="Telefono" value={user?.phone} />
                     <InputForm label="Legajo" value={user?.legajo} />
                     <InputForm label="Tipo de usuario" value={type?.name} />
                     <InputForm label="Sector" value={sector?.name} />
@@ -70,7 +72,7 @@ const InputForm = ({ label, value, type = "text" }: any) => {
                             disabled
                             id={value}
                             name={value}
-                            value={value}
+                            value={value !== null ? value : "Sin registrar"}
                             type={type}
                         />
                     </Box>
