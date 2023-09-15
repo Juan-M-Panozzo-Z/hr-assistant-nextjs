@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "seed": "ts-node --transpile-only ./src/seeders/dataSeeder.js",
+        "seed": "node ./src/seeders/dataSeeder.js",
         "build": "next build",
         "start": "next start",
         "lint": "next lint"

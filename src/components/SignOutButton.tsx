@@ -13,7 +13,7 @@ const SignOutButton = () => {
             className="gap-1 justify-center w-full"
         >
             <LockClosedIcon className="w-4 h-4" />
-            <span className="hidden md:inline">Cerrar sesión</span>
+            <span>Cerrar sesión</span>
         </Button>
     );
 };

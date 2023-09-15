@@ -22,7 +22,7 @@ const NavItem = ({
     return (
         <Link
             href={href}
-            className="text-xs py-1 px-2 rounded-md hover:bg-foreground hover:text-primary-foreground"
+            className="text-xs py-1 px-2 rounded-md hover:bg-foreground hover:text-primary-foreground duration-200 ease-in-out"
         >
             <div className="flex gap-1">
                 {Icon}

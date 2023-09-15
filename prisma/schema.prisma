@@ -1,3 +1,5 @@
+// para generar los nuevos modelos en la base de datos ejecutar npx prisma migrate dev --name init
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,16 +12,21 @@ datasource db {
 model User {
   id         Int          @id @default(autoincrement())
   email      String       @unique
+  phone      String?
   name       String
   lastname   String
   password   String
-  enabled    Boolean      @default(false)
   legajo     Int          @unique
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
+  sectorId   Int          @default(1)
+  sector     Sector       @relation(fields: [sectorId], references: [id])
   typeId     Int          @default(2)
   type       UserType     @relation(fields: [typeId], references: [id])
   checkInOut CheckInOut[]
+  enabled    Boolean      @default(false)
+  Shift      Shift?       @relation(fields: [shiftId], references: [id])
+  shiftId    Int?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
 }
 
 model UserType {
@@ -28,6 +35,28 @@ model UserType {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   users     User[]
+}
+
+model Sector {
+  id         Int      @id @default(autoincrement())
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  users      User[]
+  isChildren Boolean  @default(false)
+  parentId   Int?
+}
+
+model Shift {
+  id         Int      @id @default(autoincrement())
+  name       String
+  startTime  String
+  endTime    String
+  startTime2 String?
+  endTime2   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  users      User[]
 }
 
 model CheckInOut {
