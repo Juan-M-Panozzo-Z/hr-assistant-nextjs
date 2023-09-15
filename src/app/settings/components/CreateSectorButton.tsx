@@ -44,9 +44,9 @@ const FormSchema = z.object({
     parentId: z.string().optional().default("1"),
 });
 
-const CreateSectorButton = () => {
+const CreateSectorButton = ({ getAllSectors }: { getAllSectors: Sector[] }) => {
     const Router = useRouter();
-    const [sectors, setSectors] = useState([] as Sector[]);
+    const [sectors, setSectors] = useState<Sector[]>(getAllSectors);
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -58,18 +58,12 @@ const CreateSectorButton = () => {
                 name: data.name,
                 parentId: Number(data.parentId),
             })
-            .then(({status}) => {
+            .then(({ status }) => {
                 if (status === 200) {
                     Router.refresh();
                 }
             });
     };
-
-    useEffect(() => {
-        axios.get("/api/sectors").then((res) => {
-            setSectors(res.data);
-        });
-    }, []);
 
     return (
         <AlertDialog>
@@ -158,7 +152,9 @@ const CreateSectorButton = () => {
                                         Cancelar
                                     </AlertDialogCancel>
                                     <AlertDialogAction
-                                        onClick={() => form.handleSubmit(onSubmit)()}
+                                        onClick={() =>
+                                            form.handleSubmit(onSubmit)()
+                                        }
                                     >
                                         Crear
                                     </AlertDialogAction>
