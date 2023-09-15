@@ -137,7 +137,7 @@ const Login = () => {
                         </form>
                     </Form>
                 </Box>
-                <Box className="p-4 text-primary text-center">
+                {/* <Box className="p-4 text-primary text-center">
                     <Link
                         href={"https://sanatorioconcordia.com.ar"}
                         target={"_blank"}
@@ -153,7 +153,7 @@ const Login = () => {
                             Sanatorio Concordia
                         </Box>
                     </Link>
-                </Box>
+                </Box> */}
             </Container>
         </Section>
     );
