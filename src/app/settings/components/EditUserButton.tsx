@@ -25,8 +25,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Pencil1Icon } from "@radix-ui/react-icons";
+import { EyeClosedIcon, EyeOpenIcon, Pencil1Icon } from "@radix-ui/react-icons";
 import { User } from "@prisma/client";
+import { useState } from "react";
+import { Box } from "@radix-ui/themes";
 
 const FormSchema = z.object({
     name: z.string().optional().default(""),
@@ -40,6 +42,7 @@ const FormSchema = z.object({
 });
 
 const EditUserButton = ({ user }: { user: User }) => {
+    const [showPassword, setShowPassword] = useState(false);
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     });
@@ -138,11 +141,31 @@ const EditUserButton = ({ user }: { user: User }) => {
                                     <FormItem>
                                         <FormLabel>Contraseña</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                type="password"
-                                                placeholder="Contraseña"
-                                                {...field}
-                                            />
+                                            <Box className="relative">
+                                                <Input
+                                                    type={
+                                                        showPassword
+                                                            ? "text"
+                                                            : "password"
+                                                    }
+                                                    placeholder="Contraseña"
+                                                    {...field}
+                                                />
+                                                <Box
+                                                    className="absolute right-3 top-1/3 text-gray-400 cursor-pointer"
+                                                    onClick={() =>
+                                                        setShowPassword(
+                                                            !showPassword
+                                                        )
+                                                    }
+                                                >
+                                                    {!showPassword ? (
+                                                        <EyeClosedIcon />
+                                                    ) : (
+                                                        <EyeOpenIcon />
+                                                    )}
+                                                </Box>
+                                            </Box>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

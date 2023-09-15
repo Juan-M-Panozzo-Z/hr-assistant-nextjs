@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Box, Container, Section } from "@radix-ui/themes";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
 const formSchema = z.object({
     email: z.string().email({
@@ -30,6 +31,7 @@ const formSchema = z.object({
 
 const Login = () => {
     const [error, setError] = useState(null);
+    const [showPassword, setShowPassword] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -94,11 +96,31 @@ const Login = () => {
                                     <FormItem>
                                         <FormLabel>Contraseña</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                type="password"
-                                                placeholder="********"
-                                                {...field}
-                                            />
+                                            <Box className="relative">
+                                                <Input
+                                                    type={
+                                                        showPassword
+                                                            ? "text"
+                                                            : "password"
+                                                    }
+                                                    placeholder="Contraseña"
+                                                    {...field}
+                                                />
+                                                <Box
+                                                    className="absolute right-3 top-1/3 text-gray-400 cursor-pointer"
+                                                    onClick={() =>
+                                                        setShowPassword(
+                                                            !showPassword
+                                                        )
+                                                    }
+                                                >
+                                                    {!showPassword ? (
+                                                        <EyeClosedIcon />
+                                                    ) : (
+                                                        <EyeOpenIcon />
+                                                    )}
+                                                </Box>
+                                            </Box>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
