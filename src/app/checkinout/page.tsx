@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import axios from "axios";
 import { Section, Box, Container } from "@radix-ui/themes";
@@ -23,11 +24,11 @@ const checkinoutPage = () => {
     const handleSubmit = () => {
         axios.post("/api/checkinout/create", { legajo }).then((res) => {
             if (res.data.status !== "error") {
-                setLegajo(0);
                 setResponse(res.data.checkinout);
             } else {
                 console.log(res.data);
             }
+            setLegajo(0);
         });
     };
 
@@ -75,19 +76,27 @@ const checkinoutPage = () => {
                             </Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
-                            <AlertDialogHeader>
-                                <AlertDialogTitle>
-                                    {response
-                                        ? `Legajo ${response?.user?.legajo}`
-                                        : "Error"}
-                                </AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    {response
-                                        ? `
-                                           El usuario {response?.user?.name}{" "}
-                                           {response?.user?.lastname} marco un registro
-                                           a las{" "}
-                                           {response?.createdAt?.toLocaleString(
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>
+                                        {response ? (
+                                            `Legajo ${response?.user?.legajo}`
+                                        ) : (
+                                            <span className="text-red-500">
+                                                Error
+                                            </span>
+                                        )}
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        {response
+                                            ? `
+                                           El usuario ${
+                                               response?.user?.name
+                                           }${" "}
+                                           ${
+                                               response?.user?.lastname
+                                           } marco un registro
+                                           a las${" "}
+                                           ${response?.createdAt?.toLocaleString(
                                                "es-AR",
                                                {
                                                    hour: "numeric",
@@ -95,16 +104,16 @@ const checkinoutPage = () => {
                                                    second: "numeric",
                                                }
                                            )}`
-                                        : "El usuario no existe"}
-                                </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                                <AlertDialogAction
-                                    onClick={() => setResponse(null)}
-                                >
-                                    Cerrar
-                                </AlertDialogAction>
-                            </AlertDialogFooter>
+                                            : "El usuario no existe"}
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogAction
+                                        onClick={() => setResponse(null)}
+                                    >
+                                        Cerrar
+                                    </AlertDialogAction>
+                                </AlertDialogFooter>
                         </AlertDialogContent>
                     </AlertDialog>
                 </Box>
