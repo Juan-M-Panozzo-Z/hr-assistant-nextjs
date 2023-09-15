@@ -33,6 +33,8 @@ const TableShifts = async () => {
                             <TableCell>Nombre</TableCell>
                             <TableCell>Inicio</TableCell>
                             <TableCell>Fin</TableCell>
+                            <TableCell>Inicio 2</TableCell>
+                            <TableCell>Fin 2</TableCell>
                             <TableCell>Acciones</TableCell>
                         </TableRow>
                     </TableHeader>
@@ -43,6 +45,12 @@ const TableShifts = async () => {
                                 <TableCell>{shift.name}</TableCell>
                                 <TableCell>{shift.startTime}</TableCell>
                                 <TableCell>{shift.endTime}</TableCell>
+                                <TableCell>
+                                    {shift.startTime2 || "Sin Registrar"}
+                                </TableCell>
+                                <TableCell>
+                                    {shift.endTime2 || "Sin Registrar"}
+                                </TableCell>
                                 <TableCell>
                                     <DeleteShiftButton shift={shift as Shift} />
                                 </TableCell>

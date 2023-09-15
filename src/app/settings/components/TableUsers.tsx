@@ -13,6 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import EnableUserButton from "./EnableUserButton";
 import { QuestionMarkIcon } from "@radix-ui/react-icons";
+import EditUserButton from "./EditUserButton";
 
 const TableUsers = ({ users }: { users: User[] }) => {
     const getUserType = async (user: User) => {
@@ -58,7 +59,8 @@ const TableUsers = ({ users }: { users: User[] }) => {
                             <TableHead>Telefono</TableHead>
                             <TableHead>Fecha de Registro</TableHead>
                             <TableHead>Sector</TableHead>
-                            <TableHead>Habilitado</TableHead>
+                            <TableHead>Turno asignado</TableHead>
+                            <TableHead>Acciones</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -92,7 +94,17 @@ const TableUsers = ({ users }: { users: User[] }) => {
                                         return res?.name;
                                     })}
                                 </TableCell>
+                                <TableCell>
+                                    {user.shiftId ? (
+                                        user.shiftId
+                                    ) : (
+                                        <Badge variant={"secondary"}>
+                                            Sin registrar
+                                        </Badge>
+                                    )}
+                                </TableCell>
                                 <TableCell className="flex gap-1 items-center">
+                                    <EditUserButton user={user} />
                                     <EnableUserButton user={user} />
                                 </TableCell>
                             </TableRow>

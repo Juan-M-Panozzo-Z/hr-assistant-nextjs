@@ -51,6 +51,7 @@ const ProfileForm = async () => {
                     <InputForm label="Legajo" value={user?.legajo} />
                     <InputForm label="Tipo de usuario" value={type?.name} />
                     <InputForm label="Sector" value={sector?.name} />
+                    <InputForm label="Turno asignado" value={user?.shiftId} />
                     <InputForm
                         label="usuario creado"
                         value={user?.createdAt.toLocaleString()}

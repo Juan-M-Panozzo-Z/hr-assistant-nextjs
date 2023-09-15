@@ -4,7 +4,6 @@ import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import {
@@ -21,6 +20,7 @@ import {
 import {
     Form,
     FormControl,
+    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -32,6 +32,8 @@ const FormSchema = z.object({
     name: z.string().min(1).max(255),
     startTime: z.string().optional().default("00:00"),
     endTime: z.string().optional().default("00:00"),
+    startTime2: z.string().optional().default("00:00"),
+    endTime2: z.string().optional().default("00:00"),
 });
 
 const CreateShiftButton = ({}) => {
@@ -46,6 +48,8 @@ const CreateShiftButton = ({}) => {
                 name: data.name,
                 startTime: data.startTime,
                 endTime: data.endTime,
+                startTime2: data.startTime2,
+                endTime2: data.endTime2,
             })
             .then(() => {
                 window.location.reload();
@@ -118,6 +122,48 @@ const CreateShiftButton = ({}) => {
                                                     {...field}
                                                 />
                                             </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="startTime2"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>
+                                                Hora de incio 2
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="time"
+                                                    placeholder="00:00"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormDescription>
+                                                (opcional)
+                                            </FormDescription>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="endTime2"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Hora de fin 2</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="time"
+                                                    placeholder="00:00"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormDescription>
+                                                (opcional)
+                                            </FormDescription>
                                             <FormMessage />
                                         </FormItem>
                                     )}

@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Box, Container, Section } from "@radix-ui/themes";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const formSchema = z.object({
     email: z.string().email({
@@ -60,54 +61,77 @@ const Login = () => {
 
     return (
         <Section className="min-h-screen grid place-items-center">
-            <Container className="rounded-xl border p-6 shadow-md w-80">
-                <h1 className="text-2xl font-bold">Iniciar sesión</h1>
-                <Form {...form}>
-                    <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="space-y-4"
+            <Container>
+                <Box className="rounded-xl border p-6 shadow-md w-80">
+                    <h1 className="text-2xl font-bold">Iniciar sesión</h1>
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className="space-y-4"
+                        >
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            Correo electrónico
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="ejemplo@correo.com"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Contraseña</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="password"
+                                                placeholder="********"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Box className="flex justify-between gap-2">
+                                <Button type="submit">Ingresar</Button>
+                                <Link href="/signup">
+                                    <Button variant="outline">
+                                        Registrarse
+                                    </Button>
+                                </Link>
+                            </Box>
+                        </form>
+                    </Form>
+                </Box>
+                <Box className="p-4 text-primary text-center">
+                    <Link
+                        href={"https://sanatorioconcordia.com.ar"}
+                        target={"_blank"}
                     >
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Correo electrónico</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder="ejemplo@correo.com"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Contraseña</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            type="password"
-                                            placeholder="********"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <Box className="flex justify-between gap-2">
-                            <Button type="submit">Ingresar</Button>
-                            <Link href="/signup">
-                                <Button variant="outline">Registrarse</Button>
-                            </Link>
+                        <Box className="flex gap-1 items-center justify-center">
+                            <Image
+                                className="inline-block"
+                                src="/logo/original.png"
+                                width={40}
+                                height={40}
+                                alt="Sanatorio Concordia"
+                            />
+                            Sanatorio Concordia
                         </Box>
-                    </form>
-                </Form>
+                    </Link>
+                </Box>
             </Container>
         </Section>
     );
