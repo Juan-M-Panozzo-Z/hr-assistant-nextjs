@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import CreateSectorButton from "./CreateSectorButton";
 import { Sector } from "@prisma/client";
 import DeleteSectorButton from "./DeleteSectorButton";
+import EditSectorButton from "./EditSectorButton";
 
 const TableSectors = async () => {
     const getAllSectors = await prisma.sector.findMany();
@@ -75,6 +76,7 @@ const TableSectors = async () => {
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-left">
+                                    <EditSectorButton sector={sector} />
                                     <DeleteSectorButton
                                         sector={sector as Sector}
                                     />

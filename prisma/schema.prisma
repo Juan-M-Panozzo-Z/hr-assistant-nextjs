@@ -23,6 +23,7 @@ model User {
   type       UserType     @relation(fields: [typeId], references: [id])
   checkInOut CheckInOut[]
   enabled    Boolean      @default(false)
+  schedules  Schedule[]
   Shift      Shift?       @relation(fields: [shiftId], references: [id])
   shiftId    Int?
   createdAt  DateTime     @default(now())
@@ -38,12 +39,13 @@ model UserType {
 }
 
 model Sector {
-  id         Int      @id @default(autoincrement())
+  id         Int        @id @default(autoincrement())
   name       String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
   users      User[]
-  isChildren Boolean  @default(false)
+  schedules  Schedule[]
+  isChildren Boolean    @default(false)
   parentId   Int?
 }
 
@@ -57,6 +59,22 @@ model Shift {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   users      User[]
+}
+
+model Schedule {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  sectorId   Int
+  sector     Sector   @relation(fields: [sectorId], references: [id])
+  startDay   String
+  endDay     String?
+  startTime  String
+  endTime    String
+  startTime2 String?
+  endTime2   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model CheckInOut {

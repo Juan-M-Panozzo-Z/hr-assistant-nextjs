@@ -26,13 +26,21 @@ const SettingsPage = async () => {
     });
 
     const getAllUsers = await prisma.user.findMany();
+    const getAllSectors = await prisma.sector.findMany();
+    const getAllShifts = await prisma.shift.findMany();
+    const getAllUserTypes = await prisma.userType.findMany();
 
     return (
         <Section>
             <Container className="md:p-4">
                 {userType?.name === "Administrator" && (
                     <>
-                        <TableUsers users={getAllUsers} />
+                        <TableUsers
+                            users={getAllUsers}
+                            sectors={getAllSectors}
+                            shifts={getAllShifts}
+                            userTypes={getAllUserTypes}
+                        />
                         <TableSectors />
                         <TableShifts />
                         <SettingsUsers />

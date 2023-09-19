@@ -26,9 +26,23 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { EyeClosedIcon, EyeOpenIcon, Pencil1Icon } from "@radix-ui/react-icons";
-import { User } from "@prisma/client";
+import { Sector, User, Shift, UserType } from "@prisma/client";
 import { useState } from "react";
 import { Box } from "@radix-ui/themes";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 const FormSchema = z.object({
     name: z.string().optional().default(""),
@@ -41,7 +55,17 @@ const FormSchema = z.object({
     shiftId: z.coerce.number().optional().default(1),
 });
 
-const EditUserButton = ({ user }: { user: User }) => {
+const EditUserButton = ({
+    user,
+    sectors,
+    shifts,
+    userTypes,
+}: {
+    user: User;
+    sectors: Sector[];
+    shifts: Shift[];
+    userTypes: UserType[];
+}) => {
     const [showPassword, setShowPassword] = useState(false);
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -52,189 +76,317 @@ const EditUserButton = ({ user }: { user: User }) => {
     };
 
     return (
-        <AlertDialog>
-            <AlertDialogTrigger asChild>
-                <Button variant="ghost" size="sm">
-                    <Pencil1Icon />
-                </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>Editar usuario</AlertDialogTitle>
-                </AlertDialogHeader>
-                <AlertDialogDescription>
-                    <Form {...form}>
-                        <form className="space-y-4">
-                            <FormField
-                                defaultValue={user.name}
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Nombre</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Nombre"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                defaultValue={user.lastname}
-                                control={form.control}
-                                name="lastname"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Apellido</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Apellido"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                defaultValue={user.email}
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                defaultValue={user.phone ? user.phone : ""}
-                                control={form.control}
-                                name="phone"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Telefono</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Telefono"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                defaultValue={user.password}
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Contraseña</FormLabel>
-                                        <FormControl>
-                                            <Box className="relative">
-                                                <Input
-                                                    type={
-                                                        showPassword
-                                                            ? "text"
-                                                            : "password"
-                                                    }
-                                                    placeholder="Contraseña"
-                                                    {...field}
-                                                />
-                                                <Box
-                                                    className="absolute right-3 top-1/3 text-gray-400 cursor-pointer"
-                                                    onClick={() =>
-                                                        setShowPassword(
-                                                            !showPassword
-                                                        )
-                                                    }
-                                                >
-                                                    {!showPassword ? (
-                                                        <EyeClosedIcon />
-                                                    ) : (
-                                                        <EyeOpenIcon />
-                                                    )}
-                                                </Box>
-                                            </Box>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                defaultValue={user.typeId}
-                                control={form.control}
-                                name="typeId"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Tipo de usuario</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Tipo de usuario"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                defaultValue={user.sectorId ? user.sectorId : 0}
-                                control={form.control}
-                                name="sectorId"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Sector</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Sector"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                defaultValue={user.shiftId ? user.shiftId : 0}
-                                control={form.control}
-                                name="shiftId"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Turno</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Turno"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <AlertDialogFooter>
-                                <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                                <AlertDialogAction
-                                    onClick={form.handleSubmit(onSubmit)}
-                                >
-                                    Confirmar
-                                </AlertDialogAction>
-                            </AlertDialogFooter>
-                        </form>
-                    </Form>
-                </AlertDialogDescription>
-            </AlertDialogContent>
-        </AlertDialog>
+        <TooltipProvider delayDuration={100}>
+            <Tooltip>
+                <TooltipTrigger>
+                    <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                            <Button variant="ghost" size="sm">
+                                <Pencil1Icon />
+                            </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>
+                                    Editar usuario
+                                </AlertDialogTitle>
+                            </AlertDialogHeader>
+                            <AlertDialogDescription>
+                                <Form {...form}>
+                                    <form className="space-y-4">
+                                        <FormField
+                                            defaultValue={user.name}
+                                            control={form.control}
+                                            name="name"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>
+                                                        Nombre
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Nombre"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            defaultValue={user.lastname}
+                                            control={form.control}
+                                            name="lastname"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>
+                                                        Apellido
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Apellido"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            defaultValue={user.email}
+                                            control={form.control}
+                                            name="email"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Email</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Email"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            defaultValue={
+                                                user.phone ? user.phone : ""
+                                            }
+                                            control={form.control}
+                                            name="phone"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>
+                                                        Telefono
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            placeholder="Telefono"
+                                                            {...field}
+                                                        />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            defaultValue={user.password}
+                                            control={form.control}
+                                            name="password"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>
+                                                        Contraseña
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Box className="relative">
+                                                            <Input
+                                                                type={
+                                                                    showPassword
+                                                                        ? "text"
+                                                                        : "password"
+                                                                }
+                                                                placeholder="Contraseña"
+                                                                {...field}
+                                                            />
+                                                            <Box
+                                                                className="absolute right-3 top-1/3 text-gray-400 cursor-pointer"
+                                                                onClick={() =>
+                                                                    setShowPassword(
+                                                                        !showPassword
+                                                                    )
+                                                                }
+                                                            >
+                                                                {!showPassword ? (
+                                                                    <EyeClosedIcon />
+                                                                ) : (
+                                                                    <EyeOpenIcon />
+                                                                )}
+                                                            </Box>
+                                                        </Box>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            defaultValue={
+                                                user.typeId.toString() as any
+                                            }
+                                            control={form.control}
+                                            name="typeId"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>
+                                                        Tipo de usuario
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Select
+                                                            {...(field as any)}
+                                                            onValueChange={
+                                                                field.onChange
+                                                            }
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue
+                                                                    defaultValue={user.typeId.toString()}
+                                                                    className="w-full"
+                                                                    placeholder="Seleccionar tipo de usuario"
+                                                                    {...field}
+                                                                />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectGroup>
+                                                                    {userTypes.map(
+                                                                        (
+                                                                            userType
+                                                                        ) => (
+                                                                            <SelectItem
+                                                                                key={
+                                                                                    userType.id
+                                                                                }
+                                                                                value={userType.id.toString()}
+                                                                            >
+                                                                                {
+                                                                                    userType.name
+                                                                                }
+                                                                            </SelectItem>
+                                                                        )
+                                                                    )}
+                                                                </SelectGroup>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            defaultValue={
+                                                user?.sectorId.toString() as any
+                                            }
+                                            control={form.control}
+                                            name="sectorId"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>
+                                                        Sector
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Select
+                                                            {...(field as any)}
+                                                            onValueChange={
+                                                                field.onChange
+                                                            }
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue
+                                                                    defaultValue={user?.sectorId.toString()}
+                                                                    className="w-full"
+                                                                    placeholder="Seleccionar sector"
+                                                                    {...field}
+                                                                ></SelectValue>
+                                                                <SelectContent>
+                                                                    <SelectGroup>
+                                                                        {sectors.map(
+                                                                            (
+                                                                                sector
+                                                                            ) => (
+                                                                                <SelectItem
+                                                                                    key={
+                                                                                        sector.id
+                                                                                    }
+                                                                                    value={sector.id.toString()}
+                                                                                >
+                                                                                    {
+                                                                                        sector.name
+                                                                                    }
+                                                                                </SelectItem>
+                                                                            )
+                                                                        )}
+                                                                    </SelectGroup>
+                                                                </SelectContent>
+                                                            </SelectTrigger>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            defaultValue={
+                                                user?.shiftId?.toString() as any
+                                            }
+                                            control={form.control}
+                                            name="shiftId"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>Turno</FormLabel>
+                                                    <FormControl>
+                                                        <Select
+                                                            {...(field as any)}
+                                                            onValueChange={
+                                                                field.onChange
+                                                            }
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue
+                                                                    defaultValue={user?.shiftId?.toString()}
+                                                                    className="w-full"
+                                                                    placeholder="Seleccionar turno"
+                                                                    {...field}
+                                                                />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectGroup>
+                                                                    {shifts.map(
+                                                                        (
+                                                                            shift
+                                                                        ) => (
+                                                                            <SelectItem
+                                                                                key={
+                                                                                    shift.id
+                                                                                }
+                                                                                value={shift.id.toString()}
+                                                                            >
+                                                                                {
+                                                                                    shift.name
+                                                                                }
+                                                                            </SelectItem>
+                                                                        )
+                                                                    )}
+                                                                </SelectGroup>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>
+                                                Cancelar
+                                            </AlertDialogCancel>
+                                            <AlertDialogAction
+                                                onClick={form.handleSubmit(
+                                                    onSubmit
+                                                )}
+                                            >
+                                                Confirmar
+                                            </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </form>
+                                </Form>
+                            </AlertDialogDescription>
+                        </AlertDialogContent>
+                    </AlertDialog>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <span>editar usuario</span>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     );
 };
 

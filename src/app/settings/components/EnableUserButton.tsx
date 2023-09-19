@@ -16,6 +16,12 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "../../../components/ui/alert-dialog";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const EnableUserButton = ({ user }: { user: User }) => {
     const Router = useRouter();
@@ -32,19 +38,28 @@ const EnableUserButton = ({ user }: { user: User }) => {
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger asChild>
-                <Button
-                    disabled={user.enabled}
-                    value={user?.id}
-                    size={"sm"}
-                    variant={"ghost"}
-                >
-                    {user.enabled ? (
-                        <CheckIcon color="green" />
-                    ) : (
-                        <QuestionMarkIcon color="red" />
-                    )}
-                </Button>
+            <AlertDialogTrigger>
+                <TooltipProvider delayDuration={100}>
+                    <Tooltip>
+                        <TooltipTrigger disabled={user.enabled}>
+                            <Button
+                                disabled={user.enabled}
+                                value={user?.id}
+                                size={"sm"}
+                                variant={"ghost"}
+                            >
+                                {user.enabled ? (
+                                    <CheckIcon color="green" />
+                                ) : (
+                                    <QuestionMarkIcon color="red" />
+                                )}
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <span>Habilitar / deshabilitar usuario</span>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>

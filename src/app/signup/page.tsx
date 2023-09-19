@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Container, Section, Box } from "@radix-ui/themes";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
 const formSchema = z.object({
     name: z
@@ -39,6 +41,7 @@ const formSchema = z.object({
 
 const Register = () => {
     const router = useRouter();
+    const [showPassword, setShowPassword] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -104,7 +107,6 @@ const Register = () => {
                                 <FormItem>
                                     <FormLabel>Legajo</FormLabel>
                                     <FormControl>
-                                        {/* number */}
                                         <Input
                                             placeholder="Legajo"
                                             {...field}
@@ -137,11 +139,31 @@ const Register = () => {
                                 <FormItem>
                                     <FormLabel>Contraseña</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            type="password"
-                                            placeholder="********"
-                                            {...field}
-                                        />
+                                        <Box className="relative">
+                                            <Input
+                                                type={
+                                                    showPassword
+                                                        ? "text"
+                                                        : "password"
+                                                }
+                                                placeholder="Contraseña"
+                                                {...field}
+                                            />
+                                            <Box
+                                                className="absolute right-3 top-1/3 text-gray-400 cursor-pointer"
+                                                onClick={() =>
+                                                    setShowPassword(
+                                                        !showPassword
+                                                    )
+                                                }
+                                            >
+                                                {!showPassword ? (
+                                                    <EyeClosedIcon />
+                                                ) : (
+                                                    <EyeOpenIcon />
+                                                )}
+                                            </Box>
+                                        </Box>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

@@ -34,7 +34,7 @@ const ProfileForm = async () => {
     return (
         <Section>
             <Container className="md:w-4/5 mx-auto p-4 mt-4">
-                <div className="grid md:grid-cols-2 gap-4">
+                <Box className="grid md:grid-cols-2 gap-4">
                     <Box className="md:col-span-2 mx-auto">
                         <Image
                             src={"/avatar/sample.jpg"}
@@ -56,7 +56,7 @@ const ProfileForm = async () => {
                         label="usuario creado"
                         value={user?.createdAt.toLocaleString()}
                     />
-                </div>
+                </Box>
             </Container>
         </Section>
     );

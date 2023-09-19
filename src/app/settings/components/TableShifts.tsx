@@ -12,6 +12,7 @@ import {
 import { Shift } from "@prisma/client";
 import CreateShiftButton from "./CreateShiftButton";
 import DeleteShiftButton from "./DeleteShiftButton";
+import EditShiftButton from "./EditShiftButton";
 
 const TableShifts = async () => {
     const getAllShifts = await prisma.shift.findMany();
@@ -52,6 +53,7 @@ const TableShifts = async () => {
                                     {shift.endTime2 || "Sin Registrar"}
                                 </TableCell>
                                 <TableCell>
+                                    <EditShiftButton shift={shift as Shift} />
                                     <DeleteShiftButton shift={shift as Shift} />
                                 </TableCell>
                             </TableRow>

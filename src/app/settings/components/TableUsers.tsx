@@ -1,5 +1,5 @@
 import prisma from "@/lib/prima";
-import { User } from "@prisma/client";
+import { User, Sector, Shift, UserType } from "@prisma/client";
 import { Box } from "@radix-ui/themes";
 import {
     Table,
@@ -14,8 +14,19 @@ import { Badge } from "@/components/ui/badge";
 import EnableUserButton from "./EnableUserButton";
 import { QuestionMarkIcon } from "@radix-ui/react-icons";
 import EditUserButton from "./EditUserButton";
+import EditScheduleButton from "./EditScheduleButton";
 
-const TableUsers = ({ users }: { users: User[] }) => {
+const TableUsers = ({
+    users,
+    sectors,
+    shifts,
+    userTypes,
+}: {
+    users: User[];
+    sectors: Sector[];
+    shifts: Shift[];
+    userTypes: UserType[];
+}) => {
     const getUserType = async (user: User) => {
         const userType = await prisma.userType.findUnique({
             where: {
@@ -104,7 +115,16 @@ const TableUsers = ({ users }: { users: User[] }) => {
                                     )}
                                 </TableCell>
                                 <TableCell className="flex gap-1 items-center">
-                                    <EditUserButton user={user} />
+                                    <EditUserButton
+                                        user={user}
+                                        sectors={sectors}
+                                        shifts={shifts}
+                                        userTypes={userTypes}
+                                    />
+                                    <EditScheduleButton
+                                        user={user}
+                                        sectors={sectors}
+                                    />
                                     <EnableUserButton user={user} />
                                 </TableCell>
                             </TableRow>
