@@ -11,12 +11,22 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import CreateSectorButton from "./CreateSectorButton";
-import { Sector } from "@prisma/client";
+import { User, Sector } from "@prisma/client";
 import DeleteSectorButton from "./DeleteSectorButton";
 import EditSectorButton from "./EditSectorButton";
 
+interface SectorIncludeUsers extends Sector {
+    users: User[];
+}
 const TableSectors = async () => {
-    const getAllSectors = await prisma.sector.findMany();
+    const getAllSectors = await prisma.sector.findMany({
+        orderBy: {
+            createdAt: "desc",
+        },
+        include: {
+            users: true,
+        },
+    });
 
     const getUniqueSector = async (sectorId: number) => {
         if (sectorId !== null) {
@@ -51,11 +61,12 @@ const TableSectors = async () => {
                             <TableHead>Nombre</TableHead>
                             <TableHead>Fecha y hora de creación</TableHead>
                             <TableHead>Sector Padre</TableHead>
+                            <TableHead>Usuarios</TableHead>
                             <TableHead>Acciones</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {getAllSectors.map((sector: Sector) => (
+                        {getAllSectors.map((sector: SectorIncludeUsers) => (
                             <TableRow key={sector.id}>
                                 <TableCell className="text-left">
                                     {sector.id}
@@ -73,6 +84,11 @@ const TableSectors = async () => {
                                                 sector.parentId as number
                                             ) as any
                                         }
+                                    </Badge>
+                                </TableCell>
+                                <TableCell>
+                                    <Badge variant={"secondary"}>
+                                        {sector?.users?.length as number}
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-left">

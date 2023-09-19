@@ -369,6 +369,7 @@ const EditUserButton = ({
                                                 Cancelar
                                             </AlertDialogCancel>
                                             <AlertDialogAction
+                                                disabled
                                                 onClick={form.handleSubmit(
                                                     onSubmit
                                                 )}

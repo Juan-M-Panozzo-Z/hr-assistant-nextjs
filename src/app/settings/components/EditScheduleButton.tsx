@@ -260,6 +260,7 @@ const EditScheduleButton = ({
                             <AlertDialogFooter>
                                 <AlertDialogCancel>Cancelar</AlertDialogCancel>
                                 <AlertDialogAction
+                                    disabled
                                     onClick={basicForm.handleSubmit(
                                         handleSubmit as any
                                     )}

@@ -21,6 +21,8 @@ import { TooltipTrigger } from "@radix-ui/react-tooltip";
 
 const EditSectorButton = ({ sector }: { sector: Sector }) => {
 
+    console.log(sector)
+
     return (
         <TooltipProvider delayDuration={100}>
             <Tooltip>
@@ -37,7 +39,7 @@ const EditSectorButton = ({ sector }: { sector: Sector }) => {
                             </AlertDialogHeader>
                             <AlertDialogFooter>
                                 <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                                <AlertDialogAction>Guardar</AlertDialogAction>
+                                <AlertDialogAction disabled>Guardar</AlertDialogAction>
                             </AlertDialogFooter>
                         </AlertDialogContent>
                     </AlertDialog>

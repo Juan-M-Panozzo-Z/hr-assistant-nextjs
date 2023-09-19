@@ -140,6 +140,7 @@ const EditShiftButton = ({ shift }: { shift: Shift }) => {
                                                 Cancelar
                                             </AlertDialogCancel>
                                             <AlertDialogAction
+                                                disabled
                                                 type="button"
                                                 onClick={() => {
                                                     console.log(
