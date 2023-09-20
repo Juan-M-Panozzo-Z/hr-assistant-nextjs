@@ -2,6 +2,7 @@ import prisma from "@/lib/prima";
 import { getServerSession } from "next-auth";
 import { Container, Section } from "@radix-ui/themes";
 import NoSession from "@/components/NoSession";
+import Drawer from "./components/Drawer";
 
 const DevelopementPage = async () => {
     const session = await getServerSession();
@@ -11,9 +12,11 @@ const DevelopementPage = async () => {
 
     return (
         <Section>
-            <Container className="md:p-4">
-                <h2 className="text-2xl font-bold">Developement</h2>
-            </Container>
+            <Drawer>
+                <Container size="3">
+                    <h1 className="text-2xl font-bold">Desarrollo</h1>
+                </Container>
+            </Drawer>
         </Section>
     );
 };

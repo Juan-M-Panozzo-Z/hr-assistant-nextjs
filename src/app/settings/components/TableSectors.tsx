@@ -45,7 +45,7 @@ const TableSectors = async () => {
     };
 
     return (
-        <Box className="overflow-x-auto md:w-4/5 mx-auto p-4 mt-4">
+        <Box className="overflow-x-auto mx-auto p-4 mt-4">
             <Box className="flex items-center justify-between">
                 <h2 className="text-xl">Sectores</h2>
                 <CreateSectorButton getAllSectors={getAllSectors} />

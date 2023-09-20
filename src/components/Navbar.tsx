@@ -53,7 +53,7 @@ export const Navbar = async () => {
             <Box
                 position="fixed"
                 top="0"
-                className="grid grid-cols-3 text-center z-10 border-b py-3 px-4 max-h-20 w-full bg-background place-items-center"
+                className="grid grid-cols-3 text-center z-20 border-b py-3 px-4 max-h-20 w-full bg-background place-items-center"
             >
                 <Box className="flex gap-1 items-center mr-auto">
                     <PersonIcon className="w-6 h-6 rounded-full" />
@@ -64,11 +64,6 @@ export const Navbar = async () => {
                 <Box className="mx-auto">
                     <Nav>
                         <NavItem href="/" Icon={<HomeIcon />} label="Home" />
-                        <NavItem
-                            href="/profile"
-                            Icon={<PersonIcon />}
-                            label="Perfil"
-                        />
                         {session.user?.email === "jmpz.94@gmail.com" && (
                             <NavItem
                                 href="developement"

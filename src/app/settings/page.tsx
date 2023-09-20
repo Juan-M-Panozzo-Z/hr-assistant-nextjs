@@ -1,11 +1,12 @@
 import { getServerSession } from "next-auth";
 import prisma from "@/lib/prima";
 import NoSession from "@/components/NoSession";
-import { Container, Section } from "@radix-ui/themes";
+import { Box, Container, Section } from "@radix-ui/themes";
 import TableUsers from "./components/TableUsers";
 import SettingsUsers from "./components/SettingsUsers";
 import TableSectors from "./components/TableSectors";
 import TableShifts from "./components/TableShifts";
+import Drawer from "../developement/components/Drawer";
 
 const SettingsPage = async () => {
     const session = await getServerSession();
@@ -32,21 +33,23 @@ const SettingsPage = async () => {
 
     return (
         <Section>
-            <Container className="md:p-4">
-                {userType?.name === "Administrator" && (
-                    <>
-                        <TableUsers
-                            users={getAllUsers}
-                            sectors={getAllSectors}
-                            shifts={getAllShifts}
-                            userTypes={getAllUserTypes}
-                        />
-                        <TableSectors />
-                        <TableShifts />
-                        <SettingsUsers />
-                    </>
-                )}
-            </Container>
+            <Drawer>
+                <Container className="md:p-4">
+                    {userType?.name === "Administrator" && (
+                        <>
+                            <TableUsers
+                                users={getAllUsers}
+                                sectors={getAllSectors}
+                                shifts={getAllShifts}
+                                userTypes={getAllUserTypes}
+                            />
+                            <TableSectors />
+                            <TableShifts />
+                            <SettingsUsers />
+                        </>
+                    )}
+                </Container>
+            </Drawer>
         </Section>
     );
 };

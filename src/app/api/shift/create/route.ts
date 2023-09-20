@@ -2,7 +2,8 @@ import prisma from "@/lib/prima";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-    const { name, startTime, endTime, startTime2, endTime2 } = await req.json();
+    const { name, startTime, endTime, startTime2, endTime2, sectorId } =
+        await req.json();
 
     try {
         await prisma.shift.create({
@@ -12,6 +13,7 @@ export async function POST(req: Request) {
                 endTime,
                 startTime2,
                 endTime2,
+                sectorId,
             },
         });
         return NextResponse.json({

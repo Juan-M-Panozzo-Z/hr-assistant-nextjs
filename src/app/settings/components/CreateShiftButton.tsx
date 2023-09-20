@@ -34,6 +34,7 @@ const FormSchema = z.object({
     endTime: z.string().optional().default("00:00"),
     startTime2: z.string().optional().default("00:00"),
     endTime2: z.string().optional().default("00:00"),
+    sectorId: z.coerce.number(),
 });
 
 const CreateShiftButton = ({}) => {
@@ -50,6 +51,7 @@ const CreateShiftButton = ({}) => {
                 endTime: data.endTime,
                 startTime2: data.startTime2,
                 endTime2: data.endTime2,
+                sectorId: data.sectorId,
             })
             .then(() => {
                 window.location.reload();
@@ -164,6 +166,23 @@ const CreateShiftButton = ({}) => {
                                             <FormDescription>
                                                 (opcional)
                                             </FormDescription>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="sectorId"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Sector</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="number"
+                                                    placeholder="ID del Sector"
+                                                    {...field}
+                                                />
+                                            </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
