@@ -200,7 +200,6 @@ const EditUserButton = ({
                                                             <SelectTrigger>
                                                                 <SelectValue
                                                                     defaultValue={user.typeId.toString()}
-                                                                    className="w-full"
                                                                     placeholder="Seleccionar tipo de usuario"
                                                                     {...field}
                                                                 />

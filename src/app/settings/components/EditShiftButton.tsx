@@ -21,28 +21,48 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Shift } from "@prisma/client";
+import { Sector, Shift } from "@prisma/client";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import {
     Form,
+    FormControl,
     FormDescription,
     FormField,
     FormItem,
     FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 const FormSchema = z.object({
     endTime: z.string().optional(),
-    startTime: z.string().optional(),
+    startTime: z.string(),
     startTime2: z.string().optional(),
     endTime2: z.string().optional(),
+    sectorId: z.number().optional(),
 });
 
-const EditShiftButton = ({ shift }: { shift: Shift }) => {
+const EditShiftButton = ({
+    sectors,
+    shift,
+}: {
+    sectors: Sector[];
+    shift: Shift;
+}) => {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     });
+
+    const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+        console.log(data);
+    };
 
     return (
         <TooltipProvider delayDuration={100}>
@@ -134,19 +154,64 @@ const EditShiftButton = ({ shift }: { shift: Shift }) => {
                                                 </FormItem>
                                             )}
                                         />
-
+                                        <FormField
+                                            defaultValue={
+                                                shift.sectorId?.toString() as any
+                                            }
+                                            control={form.control}
+                                            name="sectorId"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel>
+                                                        Sector
+                                                    </FormLabel>
+                                                    <FormControl>
+                                                        <Select
+                                                            {...(field as any)}
+                                                            onValueChange={
+                                                                field.onChange
+                                                            }
+                                                        >
+                                                            <SelectTrigger>
+                                                                <SelectValue
+                                                                    defaultValue={shift.sectorId?.toString()}
+                                                                    placeholder="Seleccionar sector"
+                                                                    {...field}
+                                                                />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectGroup>
+                                                                    {sectors.map(
+                                                                        (
+                                                                            sector
+                                                                        ) => (
+                                                                            <SelectItem
+                                                                                key={
+                                                                                    sector.id
+                                                                                }
+                                                                                value={sector.id.toString()}
+                                                                            >
+                                                                                {
+                                                                                    sector.name
+                                                                                }
+                                                                            </SelectItem>
+                                                                        )
+                                                                    )}
+                                                                </SelectGroup>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
                                         <AlertDialogFooter>
                                             <AlertDialogCancel>
                                                 Cancelar
                                             </AlertDialogCancel>
                                             <AlertDialogAction
-                                                disabled
-                                                type="button"
-                                                onClick={() => {
-                                                    console.log(
-                                                        form.getValues()
-                                                    );
-                                                }}
+                                                onClick={form.handleSubmit(
+                                                    onSubmit
+                                                )}
                                             >
                                                 Guardar
                                             </AlertDialogAction>

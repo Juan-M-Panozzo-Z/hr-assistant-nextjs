@@ -16,6 +16,7 @@ import EditShiftButton from "./EditShiftButton";
 
 const TableShifts = async () => {
     const getAllShifts = await prisma.shift.findMany();
+    const getAllSectors = await prisma.sector.findMany();
 
     return (
         <Box className="overflow-x-auto md:w-4/5 mx-auto p-4 mt-4">
@@ -53,7 +54,9 @@ const TableShifts = async () => {
                                     {shift.endTime2 || "Sin Registrar"}
                                 </TableCell>
                                 <TableCell>
-                                    <EditShiftButton shift={shift as Shift} />
+                                    <EditShiftButton
+                                    sectors={getAllSectors as Shift[]}
+                                    shift={shift as Shift} />
                                     <DeleteShiftButton shift={shift as Shift} />
                                 </TableCell>
                             </TableRow>
