@@ -8,7 +8,7 @@ const Drawer = ({ children }: { children: React.ReactNode }) => {
         <>
             <Sheet>
                 <SheetTrigger className="fixed top-0 bottom-0 left-1">
-                    <Button variant="default" size={"icon"}>
+                    <Button variant="ghost" size={"icon"}>
                         <DoubleArrowRightIcon />
                     </Button>
                 </SheetTrigger>
