@@ -16,7 +16,7 @@ import DeleteSectorButton from "./DeleteSectorButton";
 import EditSectorButton from "./EditSectorButton";
 
 interface SectorIncludeUsers extends Sector {
-    users: User[]
+    users: User[];
 }
 const TableSectors = async () => {
     const getAllSectors = await prisma.sector.findMany({
@@ -66,7 +66,7 @@ const TableSectors = async () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {getAllSectors.map((sector : SectorIncludeUsers) => (
+                        {getAllSectors.map((sector: SectorIncludeUsers) => (
                             <TableRow key={sector.id}>
                                 <TableCell className="text-left">
                                     {sector.id}
@@ -92,7 +92,13 @@ const TableSectors = async () => {
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-left">
-                                    <EditSectorButton sector={sector as Sector & { users: User[] } & { shifts: Shift[] }} />
+                                    <EditSectorButton
+                                        sector={
+                                            sector as Sector & {
+                                                users: User[];
+                                            } & { shifts: Shift[] }
+                                        }
+                                    />
                                     <DeleteSectorButton
                                         sector={sector as Sector}
                                     />

@@ -44,7 +44,6 @@ import {
 const FormSchema = z.object({
     name: z.string().min(1).max(255),
     users: z.array(z.number().int().positive()).optional(),
-    shifts: z.array(z.number().int().positive()).optional(),
 });
 
 const EditSectorButton = ({
@@ -57,7 +56,6 @@ const EditSectorButton = ({
         defaultValues: {
             name: sector.name,
             users: sector?.users?.map((user: User) => user.id),
-            shifts: sector?.shifts?.map((shift) => shift.id),
         },
     });
 
@@ -146,56 +144,6 @@ const EditSectorButton = ({
                                                                             >
                                                                                 {
                                                                                     user.name
-                                                                                }
-                                                                            </SelectItem>
-                                                                        )
-                                                                    )}
-                                                                </SelectGroup>
-                                                            </SelectContent>
-                                                        </Select>
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                        <FormField
-                                            defaultValue={sector?.shifts?.map(
-                                                (shift) => shift.id
-                                            )}
-                                            control={form.control}
-                                            name="shifts"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>
-                                                        Turnos
-                                                    </FormLabel>
-                                                    <FormControl>
-                                                        <Select
-                                                            {...(field as any)}
-                                                        >
-                                                            <SelectTrigger>
-                                                                <SelectValue>
-                                                                    {sector
-                                                                        ?.shifts
-                                                                        ?.length
-                                                                        ? `${sector?.shifts?.length} turnos`
-                                                                        : "No tiene turnos asignados"}
-                                                                </SelectValue>
-                                                            </SelectTrigger>
-                                                            <SelectContent>
-                                                                <SelectGroup>
-                                                                    {sector?.shifts?.map(
-                                                                        (
-                                                                            shift
-                                                                        ) => (
-                                                                            <SelectItem
-                                                                                key={
-                                                                                    shift.id
-                                                                                }
-                                                                                value={shift.id.toString()}
-                                                                            >
-                                                                                {
-                                                                                    shift.name
                                                                                 }
                                                                             </SelectItem>
                                                                         )
