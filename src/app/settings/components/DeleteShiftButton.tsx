@@ -22,7 +22,7 @@ const DeleteShiftButton = ({ shift }: { shift: Shift }) => {
 
     const handleSubmit = async () => {
         await axios
-            .post("/api/shifts/delete", {
+            .post("/api/shift/delete", {
                 id: shift.id,
             })
             .then(() => {

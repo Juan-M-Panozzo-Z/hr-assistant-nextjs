@@ -44,7 +44,7 @@ const CreateShiftButton = ({}) => {
     const onSubmit = async (data: z.infer<typeof FormSchema>) => {
         console.log(data);
         await axios
-            .post("/api/shifts/create", {
+            .post("/api/shift/create", {
                 name: data.name,
                 startTime: data.startTime,
                 endTime: data.endTime,

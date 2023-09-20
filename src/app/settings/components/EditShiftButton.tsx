@@ -42,11 +42,11 @@ import {
 } from "@/components/ui/select";
 
 const FormSchema = z.object({
-    endTime: z.string().optional(),
+    endTime: z.string(),
     startTime: z.string(),
     startTime2: z.string().optional(),
     endTime2: z.string().optional(),
-    sectorId: z.number().optional(),
+    sectorId: z.coerce.number().optional(),
 });
 
 const EditShiftButton = ({
@@ -61,7 +61,18 @@ const EditShiftButton = ({
     });
 
     const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-        console.log(data);
+        await axios
+            .post("/api/shift/update", {
+                id: shift.id,
+                startTime: data.startTime,
+                endTime: data.endTime,
+                startTime2: data.startTime2,
+                endTime2: data.endTime2,
+                sectorId: data.sectorId,
+            })
+            .then(() => {
+                window.location.reload();
+            });
     };
 
     return (

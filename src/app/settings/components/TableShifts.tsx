@@ -9,10 +9,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Shift } from "@prisma/client";
+import { Sector, Shift } from "@prisma/client";
 import CreateShiftButton from "./CreateShiftButton";
 import DeleteShiftButton from "./DeleteShiftButton";
 import EditShiftButton from "./EditShiftButton";
+import { Badge } from "@/components/ui/badge";
 
 const TableShifts = async () => {
     const getAllShifts = await prisma.shift.findMany();
@@ -37,6 +38,7 @@ const TableShifts = async () => {
                             <TableCell>Fin</TableCell>
                             <TableCell>Inicio 2</TableCell>
                             <TableCell>Fin 2</TableCell>
+                            <TableCell>Sector asignado</TableCell>
                             <TableCell>Acciones</TableCell>
                         </TableRow>
                     </TableHeader>
@@ -54,9 +56,23 @@ const TableShifts = async () => {
                                     {shift.endTime2 || "Sin Registrar"}
                                 </TableCell>
                                 <TableCell>
+                                    <Badge variant={"secondary"}>
+                                        {shift.sectorId
+                                            ? getAllSectors
+                                                  .filter(
+                                                      (sector) =>
+                                                          sector.id ===
+                                                          shift.sectorId
+                                                  )
+                                                  .map((sector) => sector.name)
+                                            : "Sin Sector"}
+                                    </Badge>
+                                </TableCell>
+                                <TableCell>
                                     <EditShiftButton
-                                    sectors={getAllSectors as Shift[]}
-                                    shift={shift as Shift} />
+                                        sectors={getAllSectors as Sector[]}
+                                        shift={shift as Shift}
+                                    />
                                     <DeleteShiftButton shift={shift as Shift} />
                                 </TableCell>
                             </TableRow>
