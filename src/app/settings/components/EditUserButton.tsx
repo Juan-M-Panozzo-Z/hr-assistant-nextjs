@@ -25,10 +25,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { EyeClosedIcon, EyeOpenIcon, Pencil1Icon } from "@radix-ui/react-icons";
+import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Sector, User, Shift, UserType } from "@prisma/client";
-import { useState } from "react";
-import { Box } from "@radix-ui/themes";
 import {
     Tooltip,
     TooltipContent,
@@ -49,7 +47,6 @@ const FormSchema = z.object({
     lastname: z.string().optional().default(""),
     email: z.string().optional().default(""),
     phone: z.string().optional().default(""),
-    password: z.string().optional().default(""),
     typeId: z.coerce.number().optional().default(2),
     sectorId: z.coerce.number().optional().default(1),
     shiftId: z.coerce.number().optional().default(1),
@@ -66,13 +63,25 @@ const EditUserButton = ({
     shifts: Shift[];
     userTypes: UserType[];
 }) => {
-    const [showPassword, setShowPassword] = useState(false);
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     });
 
     const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-        console.log(data);
+        await axios
+            .post("/api/user/update", {
+                id: user.id,
+                name: data.name,
+                lastname: data.lastname,
+                email: data.email,
+                phone: data.phone,
+                typeId: data.typeId,
+                sectorId: data.sectorId,
+                shiftId: data.shiftId,
+            })
+            .then(() => {
+                window.location.reload();
+            });
     };
 
     return (
@@ -165,46 +174,6 @@ const EditUserButton = ({
                                                             placeholder="Telefono"
                                                             {...field}
                                                         />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
-                                        <FormField
-                                            defaultValue={user.password}
-                                            control={form.control}
-                                            name="password"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <FormLabel>
-                                                        Contraseña
-                                                    </FormLabel>
-                                                    <FormControl>
-                                                        <Box className="relative">
-                                                            <Input
-                                                                type={
-                                                                    showPassword
-                                                                        ? "text"
-                                                                        : "password"
-                                                                }
-                                                                placeholder="Contraseña"
-                                                                {...field}
-                                                            />
-                                                            <Box
-                                                                className="absolute right-3 top-1/3 text-gray-400 cursor-pointer"
-                                                                onClick={() =>
-                                                                    setShowPassword(
-                                                                        !showPassword
-                                                                    )
-                                                                }
-                                                            >
-                                                                {!showPassword ? (
-                                                                    <EyeClosedIcon />
-                                                                ) : (
-                                                                    <EyeOpenIcon />
-                                                                )}
-                                                            </Box>
-                                                        </Box>
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -369,10 +338,9 @@ const EditUserButton = ({
                                                 Cancelar
                                             </AlertDialogCancel>
                                             <AlertDialogAction
-                                                disabled
-                                                onClick={form.handleSubmit(
-                                                    onSubmit
-                                                )}
+                                                onClick={
+                                                    form.handleSubmit(onSubmit)
+                                                }
                                             >
                                                 Confirmar
                                             </AlertDialogAction>

@@ -45,6 +45,7 @@ model Sector {
   updatedAt  DateTime   @updatedAt
   users      User[]
   schedules  Schedule[]
+  shifts     Shift[]
   isChildren Boolean    @default(false)
   parentId   Int?
 }
@@ -59,6 +60,8 @@ model Shift {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   users      User[]
+  sectorId   Int?
+  sector     Sector?  @relation(fields: [sectorId], references: [id])
 }
 
 model Schedule {

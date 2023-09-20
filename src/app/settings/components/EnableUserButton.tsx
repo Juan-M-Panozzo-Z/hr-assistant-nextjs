@@ -28,7 +28,7 @@ const EnableUserButton = ({ user }: { user: User }) => {
 
     const handleSubmit = async () => {
         await axios
-            .post("/api/users/enable", {
+            .post("/api/user/enable", {
                 id: user.id,
             })
             .then(() => {

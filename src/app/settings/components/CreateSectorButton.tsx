@@ -51,7 +51,7 @@ const CreateSectorButton = ({ getAllSectors }: { getAllSectors: Sector[] }) => {
 
     const onSubmit = async (data: z.infer<typeof FormSchema>) => {
         await axios
-            .post("/api/sectors/create", {
+            .post("/api/sector/create", {
                 name: data.name,
                 parentId: Number(data.parentId),
             })

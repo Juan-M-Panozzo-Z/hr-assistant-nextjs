@@ -22,7 +22,7 @@ const DeleteSectorButton = ({ sector }: { sector: Sector }) => {
 
     const handleSubmit = async () => {
         await axios
-            .post("/api/sectors/delete", {
+            .post("/api/sector/delete", {
                 id: sector.id,
             })
             .then((res) => {
