@@ -15,6 +15,7 @@ import EnableUserButton from "./EnableUserButton";
 import { QuestionMarkIcon } from "@radix-ui/react-icons";
 import EditUserButton from "./EditUserButton";
 import EditScheduleButton from "./EditScheduleButton";
+import CreateSchedule from "@/app/developement/components/CreateSchedule";
 
 const TableUsers = ({
     users,
@@ -46,7 +47,7 @@ const TableUsers = ({
     };
 
     return (
-        <Box className="overflow-x-auto mx-auto p-4 mt-4">
+        <Box className="overflow-x-auto md:w-4/5 mx-auto p-4 mt-4">
             <h2 className="text-xl ">Usuarios</h2>
             <Box className="rounded-md border mt-4">
                 <Table>
@@ -121,10 +122,7 @@ const TableUsers = ({
                                         shifts={shifts}
                                         userTypes={userTypes}
                                     />
-                                    <EditScheduleButton
-                                        user={user}
-                                        sectors={sectors}
-                                    />
+                                    <CreateSchedule user={user} />
                                     <EnableUserButton user={user} />
                                 </TableCell>
                             </TableRow>

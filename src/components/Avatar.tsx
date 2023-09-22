@@ -31,7 +31,7 @@ const AvatarNavbar = async () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                     <Link href="/profile">
-                        <Button variant={"ghost"}  className="gap-1 w-full">
+                        <Button variant={"ghost"} size={"sm"}  className="gap-1 w-full">
                             <PersonIcon className="w-4 h-4" />
                             <span>Perfil</span>
                         </Button>

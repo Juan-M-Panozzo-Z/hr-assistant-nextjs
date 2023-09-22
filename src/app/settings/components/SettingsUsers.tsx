@@ -45,7 +45,7 @@ const SwitchComponent = ({
 
 const SettingsUsers = () => {
     return (
-        <Container className=" mx-auto p-4 mt-4">
+        <Container className="overflow-x-auto md:w-4/5 mx-auto p-4 mt-4">
             <h2 className="text-xl ">Parametros del sistema</h2>
             <Box className="grid grid-cols-2 gap-4 mt-4">
                 <SwitchComponent

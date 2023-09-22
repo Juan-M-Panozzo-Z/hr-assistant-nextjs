@@ -8,6 +8,7 @@ const SignOutButton = () => {
     return (
         <Button
             variant={"destructive"}
+            size={"sm"}
             onClick={() => signOut()}
             className="gap-1 w-full"
         >

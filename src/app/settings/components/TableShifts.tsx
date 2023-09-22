@@ -20,7 +20,7 @@ const TableShifts = async () => {
     const getAllSectors = await prisma.sector.findMany();
 
     return (
-        <Box className="overflow-x-auto mx-auto p-4 mt-4">
+        <Box className="overflow-x-auto md:w-4/5 mx-auto p-4 mt-4">
             <Box className="flex items-center justify-between">
                 <h2 className="text-xl">Turnos</h2>
                 <CreateShiftButton />
@@ -32,14 +32,14 @@ const TableShifts = async () => {
                     </TableCaption>
                     <TableHeader>
                         <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell>Nombre</TableCell>
-                            <TableCell>Inicio</TableCell>
-                            <TableCell>Fin</TableCell>
-                            <TableCell>Inicio 2</TableCell>
-                            <TableCell>Fin 2</TableCell>
-                            <TableCell>Sector asignado</TableCell>
-                            <TableCell>Acciones</TableCell>
+                            <TableHead>ID</TableHead>
+                            <TableHead>Nombre</TableHead>
+                            <TableHead>Inicio</TableHead>
+                            <TableHead>Fin</TableHead>
+                            <TableHead>Inicio 2</TableHead>
+                            <TableHead>Fin 2</TableHead>
+                            <TableHead>Sector asignado</TableHead>
+                            <TableHead>Acciones</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
