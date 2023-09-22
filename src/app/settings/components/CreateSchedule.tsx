@@ -13,7 +13,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Box, Container, Table } from "@radix-ui/themes";
+import { Box, Container } from "@radix-ui/themes";
 import {
     Form,
     FormControl,
@@ -24,19 +24,33 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { User } from "@prisma/client";
+import { Sector, User } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { ClockIcon } from "@radix-ui/react-icons";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 const FormSchema = z.object({
-    userId: z.coerce.number(),
+    sectorId: z.coerce.number(),
     startTime: z.string(),
     endTime: z.string(),
     startTime2: z.string().optional(),
     endTime2: z.string().optional(),
 });
 
-const CreateSchedule = ({ user }: { user: User }) => {
+const CreateSchedule = ({
+    user,
+    sectors,
+}: {
+    user: User;
+    sectors: Sector[];
+}) => {
     const [open, setOpen] = useState(false);
     const [date, setDate] = useState(new Date());
     const [month, setMonth] = useState(new Date().getMonth());
@@ -45,6 +59,7 @@ const CreateSchedule = ({ user }: { user: User }) => {
     const onSubmit = async (data: z.infer<typeof FormSchema>) => {
         console.log({
             date: date.toISOString().split("T")[0],
+            userId: user.id,
             ...data,
         });
     };
@@ -139,17 +154,42 @@ const CreateSchedule = ({ user }: { user: User }) => {
                             <Form {...form}>
                                 <form className="space-y-4">
                                     <FormField
-                                        defaultValue={user?.id}
                                         control={form.control}
-                                        name="userId"
+                                        name="sectorId"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>Usuario</FormLabel>
+                                                <FormLabel>Sector</FormLabel>
                                                 <FormControl>
-                                                    <Input
-                                                        defaultValue={user.id}
-                                                        {...field}
-                                                    />
+                                                    <Select
+                                                        {...(field as any)}
+                                                        onValueChange={
+                                                            field.onChange
+                                                        }
+                                                    >
+                                                        <SelectTrigger>
+                                                            <SelectValue placeholder="Seleccione un sector" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                {sectors.map(
+                                                                    (
+                                                                        sector
+                                                                    ) => (
+                                                                        <SelectItem
+                                                                            key={
+                                                                                sector.id
+                                                                            }
+                                                                            value={sector.id.toString()}
+                                                                        >
+                                                                            {
+                                                                                sector.name
+                                                                            }
+                                                                        </SelectItem>
+                                                                    )
+                                                                )}
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                    </Select>
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>

@@ -14,8 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import EnableUserButton from "./EnableUserButton";
 import { QuestionMarkIcon } from "@radix-ui/react-icons";
 import EditUserButton from "./EditUserButton";
-import EditScheduleButton from "./EditScheduleButton";
-import CreateSchedule from "@/app/developement/components/CreateSchedule";
+import CreateSchedule from "./CreateSchedule";
 
 const TableUsers = ({
     users,
@@ -122,7 +121,9 @@ const TableUsers = ({
                                         shifts={shifts}
                                         userTypes={userTypes}
                                     />
-                                    <CreateSchedule user={user} />
+                                    <CreateSchedule
+                                    sectors = {sectors}
+                                    user={user} />
                                     <EnableUserButton user={user} />
                                 </TableCell>
                             </TableRow>
