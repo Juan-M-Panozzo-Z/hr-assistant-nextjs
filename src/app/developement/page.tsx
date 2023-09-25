@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { Container, Section } from "@radix-ui/themes";
 import NoSession from "@/components/NoSession";
 import prisma from "@/lib/prima";
+import Calendar from "./components/Calendar";
 
 const DevelopementPage = async () => {
     const session = await getServerSession();
@@ -18,8 +19,8 @@ const DevelopementPage = async () => {
 
     return (
         <Section>
-            <Container size="3">
-                <h1 className="text-2xl font-bold">Desarrollo</h1>
+            <Container className="w-4/5 mx-auto">
+                <Calendar/>
             </Container>
         </Section>
     );

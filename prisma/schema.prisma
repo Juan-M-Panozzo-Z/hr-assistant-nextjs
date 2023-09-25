@@ -70,8 +70,7 @@ model Schedule {
   user       User     @relation(fields: [userId], references: [id])
   sectorId   Int
   sector     Sector   @relation(fields: [sectorId], references: [id])
-  startDay   String
-  endDay     String?
+  date       String
   startTime  String
   endTime    String
   startTime2 String?

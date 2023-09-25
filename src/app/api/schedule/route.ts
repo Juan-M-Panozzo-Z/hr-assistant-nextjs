@@ -2,18 +2,13 @@ import prisma from "@/lib/prima";
 import { Schedule } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
-    const schedule = await req.json();
-    console.log(schedule)
-
+export async function GET() {
     try {
-        await prisma.schedule.create({
-            data: schedule,
-        });
+        const schedules: Schedule[] = await prisma.schedule.findMany({});
 
         return NextResponse.json({
             status: 200,
-            body: "success",
+            body: schedules,
         });
     } catch (error) {
         return NextResponse.json({
