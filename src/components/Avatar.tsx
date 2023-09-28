@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Box } from "@radix-ui/themes";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,7 +11,8 @@ import {
 import SignOutButton from "./SignOutButton";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { PersonIcon } from "@radix-ui/react-icons";
+import { ClockIcon, PersonIcon } from "@radix-ui/react-icons";
+import { Separator } from "./ui/separator";
 const AvatarNavbar = async () => {
     const session = await getServerSession();
 
@@ -26,17 +26,34 @@ const AvatarNavbar = async () => {
                     </AvatarFallback>
                 </Avatar>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="max-w-md mr-2">
+            <DropdownMenuContent className="w-56 mr-2">
                 <DropdownMenuLabel>{session?.user?.name}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                     <Link href="/profile">
-                        <Button variant={"ghost"} size={"sm"}  className="gap-1 w-full">
+                        <Button
+                        size={"sm"}
+                        variant={"ghost"}
+                        className="justify-start gap-1 w-48"
+                        >
                             <PersonIcon className="w-4 h-4" />
                             <span>Perfil</span>
                         </Button>
                     </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem>
+                    <Link href="/schedules">
+                        <Button
+                        size={"sm"}
+                        variant={"ghost"}
+                        className="justify-start gap-1 w-48"
+                        >
+                            <ClockIcon className="w-4 h-4" />
+                            <span>Horarios</span>
+                        </Button>
+                    </Link>
+                </DropdownMenuItem>
+                <Separator />
                 <DropdownMenuItem>
                     <SignOutButton />
                 </DropdownMenuItem>

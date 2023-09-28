@@ -3,17 +3,16 @@ import { Schedule } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-    const schedule = await req.json();
-    console.log(schedule)
+    const scheduleToCreate = await req.json();
 
     try {
-        await prisma.schedule.create({
-            data: schedule,
+        const schedule = await prisma.schedule.create({
+            data: scheduleToCreate,
         });
 
         return NextResponse.json({
             status: 200,
-            body: "success",
+            body: schedule,
         });
     } catch (error) {
         return NextResponse.json({

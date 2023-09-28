@@ -1,7 +1,5 @@
-import prisma from "@/lib/prima";
-import { getServerSession } from "next-auth";
+import { User } from "@prisma/client";
 import { Box, Container, Section } from "@radix-ui/themes";
-import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import {
@@ -12,24 +10,18 @@ import {
 } from "../../../components/ui/tooltip";
 import Image from "next/image";
 
-const ProfileForm = async () => {
-    const session = await getServerSession();
-    const user = await prisma.user.findUnique({
-        where: {
-            email: session?.user?.email as string,
-        },
-    });
-    const type = await prisma.userType.findUnique({
-        where: {
-            id: user?.typeId as number,
-        },
-    });
+interface UserExtended extends User {
+    type: {
+        name: string;
+    };
+    sector: {
+        name: string;
+    };
+}
 
-    const sector = await prisma.sector.findUnique({
-        where: {
-            id: user?.sectorId as number,
-        },
-    });
+const ProfileForm = async ({ user }: { user: UserExtended }) => {
+    const type = user.type.name;
+    const sector = user.sector.name;
 
     return (
         <Section>
@@ -49,8 +41,8 @@ const ProfileForm = async () => {
                     <InputForm label="Email" value={user?.email} />
                     <InputForm label="Telefono" value={user?.phone} />
                     <InputForm label="Legajo" value={user?.legajo} />
-                    <InputForm label="Tipo de usuario" value={type?.name} />
-                    <InputForm label="Sector" value={sector?.name} />
+                    <InputForm label="Tipo de usuario" value={type} />
+                    <InputForm label="Sector" value={sector} />
                     <InputForm label="Turno asignado" value={user?.shiftId} />
                     <InputForm
                         label="usuario creado"
