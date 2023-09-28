@@ -4,7 +4,7 @@ import { es } from "date-fns/locale";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
     Dialog,
     DialogContent,
@@ -25,7 +25,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Sector, User, Schedule } from "@prisma/client";
+import { Sector, User } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { ClockIcon } from "@radix-ui/react-icons";
 import {
@@ -55,19 +55,12 @@ const CreateSchedule = ({
     sectors: Sector[];
 }) => {
     const [date, setDate] = useState(new Date());
-    const [schedules, setSchedules] = useState([]);
     const [schedule, setSchedule] = useState({
         date: "",
         startTime: "",
         endTime: "",
     });
     const [open, setOpen] = useState(false);
-
-    useEffect(() => {
-        axios.get(`/api/schedule/${user.id}`).then(({ data }) => {
-            setSchedules(data.body);
-        });
-    }, [user]);
 
     const onSubmit = async (data: z.infer<typeof FormSchema>) => {
         await axios
@@ -94,7 +87,7 @@ const CreateSchedule = ({
     });
 
     return (
-        <Dialog modal={false}>
+        <Dialog>
             <DialogTrigger>
                 <ClockIcon />
             </DialogTrigger>

@@ -68,7 +68,6 @@ const TableUsers = ({
                             <TableHead>Apellido</TableHead>
                             <TableHead>Correo Electronico</TableHead>
                             <TableHead>Telefono</TableHead>
-                            <TableHead>Fecha de Registro</TableHead>
                             <TableHead>Sector</TableHead>
                             <TableHead>Turno asignado</TableHead>
                             <TableHead>Acciones</TableHead>
@@ -96,9 +95,6 @@ const TableUsers = ({
                                             Sin registrar
                                         </Badge>
                                     )}
-                                </TableCell>
-                                <TableCell>
-                                    {user.createdAt.toLocaleString()}
                                 </TableCell>
                                 <TableCell>
                                     {getSector(user).then((res) => {

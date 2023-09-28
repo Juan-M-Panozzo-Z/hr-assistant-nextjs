@@ -59,7 +59,6 @@ const TableSectors = async () => {
                         <TableRow>
                             <TableHead>ID</TableHead>
                             <TableHead>Nombre</TableHead>
-                            <TableHead>Fecha y hora de creación</TableHead>
                             <TableHead>Sector Padre</TableHead>
                             <TableHead>Usuarios</TableHead>
                             <TableHead>Acciones</TableHead>
@@ -73,9 +72,6 @@ const TableSectors = async () => {
                                 </TableCell>
                                 <TableCell className="text-left">
                                     {sector.name}
-                                </TableCell>
-                                <TableCell className="text-left">
-                                    {sector.createdAt.toLocaleString()}
                                 </TableCell>
                                 <TableCell className="text-left">
                                     <Badge variant={"secondary"}>
