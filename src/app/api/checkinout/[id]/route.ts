@@ -11,7 +11,6 @@ export async function GET(req: Request) {
             },
         });
         if (user?.typeId !== 1) {
-            console.log("admin");
             const checkinout = await prisma.checkInOut.findMany({
                 include: {
                     user: {
@@ -34,7 +33,6 @@ export async function GET(req: Request) {
                 body: checkinout,
             });
         } else {
-            console.log("user");
             const checkinout = await prisma.checkInOut.findMany({
                 where: {
                     user: {
