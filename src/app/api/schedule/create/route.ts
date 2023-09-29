@@ -1,4 +1,4 @@
-import prisma from "@/lib/prima";
+import prisma from "@/lib/prisma";
 import { Schedule } from "@prisma/client";
 import { NextResponse } from "next/server";
 

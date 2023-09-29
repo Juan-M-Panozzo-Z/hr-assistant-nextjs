@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { format } from "date-fns-tz";
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -34,7 +35,8 @@ import {
     TableRow,
 } from "./ui/table";
 import { Badge } from "./ui/badge";
-import { getRandomDate } from "@/lib/generateRandomDate";
+import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
 
 export type Checkinout = {
     id: number;
@@ -47,339 +49,6 @@ export type Checkinout = {
     date: string;
     registro: number;
 };
-
-const data: Checkinout[] = [
-    {
-        id: 1,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 2,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 3,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 4,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 5,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 6,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 1,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 2,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 3,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 4,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 5,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 6,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 1,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 2,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 3,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 4,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 5,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 6,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 1,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 2,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 3,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 4,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 5,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 6,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 1,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 2,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 3,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 1,
-    },
-    {
-        id: 4,
-        userId: 1,
-        nombre: "Juan",
-        apellido: "Perez",
-        legajo: 1234,
-        sector: 1,
-        email: "ejemplo@ejemplo.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 5,
-        userId: 2,
-        nombre: "Rafael",
-        apellido: "Nadal",
-        legajo: 1235,
-        sector: 1,
-        email: "rafael@nadal.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-    {
-        id: 6,
-        userId: 3,
-        nombre: "Roger",
-        apellido: "Federer",
-        legajo: 1236,
-        sector: 1,
-        email: "roger@federer.com",
-        date: getRandomDate(),
-        registro: 2,
-    },
-];
 
 export const columns: ColumnDef<Checkinout>[] = [
     {
@@ -485,7 +154,7 @@ export const columns: ColumnDef<Checkinout>[] = [
                         column.toggleSorting(column.getIsSorted() === "asc")
                     }
                 >
-                    Fecha
+                    Fecha y hora
                     <CaretSortIcon className="ml-2 h-4 w-4" />
                 </Button>
             );
@@ -514,12 +183,24 @@ export const columns: ColumnDef<Checkinout>[] = [
 ];
 
 export const CheckinoutDataTable = () => {
+    const { data: session } = useSession();
+    const [checkinouts, setCheckinouts] = useState<Checkinout[]>([]);
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
         {}
     );
     const [rowSelection, setRowSelection] = useState({});
+
+    useEffect(() => {
+        if (session) {
+            getChecks(session).then((data) => {
+                setCheckinouts(data);
+            });
+        }
+    }, [session]);
+
+    const data = checkinouts;
 
     const table = useReactTable({
         data,
@@ -680,4 +361,29 @@ export const CheckinoutDataTable = () => {
             </Box>
         </Box>
     );
+};
+
+const getChecks = async (session: Session) => {
+    const res = await axios.get(`api/checkinout/${session?.user?.email}`);
+    const { data } = res;
+    const { body } = data;
+    let formattedData = [] as any;
+
+    if (Array.isArray(body)) {
+        formattedData = body.map((check) => {
+            return {
+                id: check.id,
+                userId: check.user.id,
+                nombre: check.user.name,
+                apellido: check.user.lastname,
+                legajo: check.user.legajo,
+                sector: check.user.sector.name,
+                email: check.user.email,
+                date: format(new Date(check.createdAt), "dd/MM/yyyy HH:mm:ss"),
+                registro: check.checkType,
+            };
+        });
+    }
+
+    return formattedData;
 };

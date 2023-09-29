@@ -1,4 +1,4 @@
-import prisma from "@/lib/prima";
+import prisma from "@/lib/prisma";
 import { Box, Container } from "@radix-ui/themes";
 import { Badge } from "./ui/badge";
 

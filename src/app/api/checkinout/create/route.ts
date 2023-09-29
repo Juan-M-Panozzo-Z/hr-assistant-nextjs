@@ -1,4 +1,4 @@
-import prisma from "@/lib/prima";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -11,8 +11,6 @@ export async function POST(req: Request) {
             },
         });
 
-        console.log(user);
-
         if (!user) {
             return NextResponse.json({
                 status: "error",
@@ -20,7 +18,6 @@ export async function POST(req: Request) {
             });
         }
 
-        // que checkinout tambien me devuelva el usuario
         const checkinout = await prisma.checkInOut.create({
             data: {
                 userId: user.id,

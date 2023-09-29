@@ -1,5 +1,5 @@
 import NoSession from "@/components/NoSession";
-import prisma from "@/lib/prima";
+import prisma from "@/lib/prisma";
 import { User } from "@prisma/client";
 import { Box, Container, Section } from "@radix-ui/themes";
 import { getServerSession } from "next-auth";

@@ -9,7 +9,7 @@ import {
 } from "@radix-ui/react-icons";
 import { Box, Text } from "@radix-ui/themes";
 import AvatarNavbar from "./Avatar";
-import prisma from "@/lib/prima";
+import prisma from "@/lib/prisma";
 
 const Nav = ({ children }: { children: ReactNode }) => {
     return <ul className="flex gap-2">{children}</ul>;

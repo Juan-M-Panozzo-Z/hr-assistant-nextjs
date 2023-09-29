@@ -3,7 +3,7 @@ import { Container, Box, Section, Text } from "@radix-ui/themes";
 import ProfileForm from "./components/ProfileForm";
 import NoSession from "@/components/NoSession";
 import { User } from "@prisma/client";
-import prisma from "@/lib/prima";
+import prisma from "@/lib/prisma";
 import Calendar from "./components/Calendar";
 
 const ProfilePage = async () => {

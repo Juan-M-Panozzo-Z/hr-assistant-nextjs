@@ -1,6 +1,6 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import prisma from "./prima";
+import prisma from "./prisma";
 import bcrypt from "bcrypt";
 
 interface Credentials {
@@ -13,9 +13,6 @@ export const authOptions: NextAuthOptions = {
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET,
-    jwt: {
-        secret: process.env.NEXTAUTH_SECRET,
-    },
     providers: [
         CredentialsProvider({
             name: "Sign in",

@@ -1,11 +1,10 @@
 import { getServerSession } from "next-auth";
-import prisma from "@/lib/prima";
+import prisma from "@/lib/prisma";
 import NoSession from "@/components/NoSession";
 import { Box, Container, Section } from "@radix-ui/themes";
 import TableUsers from "./components/TableUsers";
 import SettingsUsers from "./components/SettingsUsers";
 import TableSectors from "./components/TableSectors";
-import TableShifts from "./components/TableShifts";
 
 const SettingsPage = async () => {
     const session = await getServerSession();
@@ -42,7 +41,6 @@ const SettingsPage = async () => {
                             userTypes={getAllUserTypes}
                         />
                         <TableSectors />
-                        <TableShifts />
                         <SettingsUsers />
                     </>
                 )}

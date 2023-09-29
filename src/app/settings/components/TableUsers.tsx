@@ -1,4 +1,4 @@
-import prisma from "@/lib/prima";
+import prisma from "@/lib/prisma";
 import { User, Sector, Shift, UserType } from "@prisma/client";
 import { Box } from "@radix-ui/themes";
 import {

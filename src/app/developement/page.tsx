@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { Container, Section } from "@radix-ui/themes";
 import NoSession from "@/components/NoSession";
-import prisma from "@/lib/prima";
+import prisma from "@/lib/prisma";
 
 const DevelopementPage = async () => {
     const session = await getServerSession();
